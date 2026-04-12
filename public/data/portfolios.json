@@ -1,0 +1,64 @@
+{
+  "conservative": {
+    "name": "Conservative Portfolio",
+    "tagline": "Safety First",
+    "description": "A low-risk portfolio designed for maximum capital preservation. Ideal if you're just starting out or prefer steady, predictable returns.",
+    "riskScore": 25,
+    "color": "#10B981",
+    "allocation": [
+      { "asset": "Fixed Deposits", "percentage": 40, "color": "#94A3B8" },
+      { "asset": "Government Bonds", "percentage": 25, "color": "#6366F1" },
+      { "asset": "Gold", "percentage": 15, "color": "#F59E0B" },
+      { "asset": "Nifty 50 Index Fund", "percentage": 15, "color": "#8B5CF6" },
+      { "asset": "Liquid Fund", "percentage": 5, "color": "#06B6D4" }
+    ],
+    "expectedReturn": {
+      "1year": { "best": 10, "expected": 7.5, "worst": 4 },
+      "3years": { "best": 9.5, "expected": 7.8, "worst": 5.5 },
+      "5years": { "best": 9.2, "expected": 8.0, "worst": 6.0 }
+    },
+    "aiExplanation": "Think of this portfolio like a fortress with a small garden. 65% of your money is locked in super-safe assets (FDs, bonds, and liquid funds) — these are the fortress walls. Gold (15%) acts as your shield during market storms. And the Nifty 50 allocation (15%) is your garden — it grows slowly but surely over time."
+  },
+  "balanced": {
+    "name": "Balanced Portfolio",
+    "tagline": "Best of Both Worlds",
+    "description": "A moderate-risk portfolio that balances growth with stability. Perfect for those who want to grow their wealth while keeping risk manageable.",
+    "riskScore": 50,
+    "color": "#6366F1",
+    "allocation": [
+      { "asset": "Nifty 50 Index Fund", "percentage": 35, "color": "#6366F1" },
+      { "asset": "Mid Cap Fund", "percentage": 15, "color": "#8B5CF6" },
+      { "asset": "Government Bonds", "percentage": 20, "color": "#94A3B8" },
+      { "asset": "Gold", "percentage": 15, "color": "#F59E0B" },
+      { "asset": "Fixed Deposits", "percentage": 10, "color": "#06B6D4" },
+      { "asset": "International Fund", "percentage": 5, "color": "#EC4899" }
+    ],
+    "expectedReturn": {
+      "1year": { "best": 18, "expected": 11.5, "worst": -5 },
+      "3years": { "best": 16, "expected": 12.0, "worst": 3 },
+      "5years": { "best": 15, "expected": 12.5, "worst": 6 }
+    },
+    "aiExplanation": "This portfolio is like a well-balanced meal. Your equity allocation (50% in Nifty 50 + Mid Caps + International) is the protein that builds wealth over time. Bonds and FDs (30%) are the carbs — they provide stable energy. And Gold (15%) is your insurance — it tends to go up when everything else goes down."
+  },
+  "aggressive": {
+    "name": "Growth Portfolio",
+    "tagline": "Go Big or Go Home",
+    "description": "A high-growth portfolio designed for maximum returns over the long term. Expect bigger swings, but historically higher rewards for those who stay the course.",
+    "riskScore": 78,
+    "color": "#EF4444",
+    "allocation": [
+      { "asset": "Nifty 50 Index Fund", "percentage": 30, "color": "#6366F1" },
+      { "asset": "Mid Cap Fund", "percentage": 25, "color": "#8B5CF6" },
+      { "asset": "Small Cap Fund", "percentage": 15, "color": "#EC4899" },
+      { "asset": "International Fund", "percentage": 15, "color": "#F97316" },
+      { "asset": "Gold", "percentage": 10, "color": "#F59E0B" },
+      { "asset": "Government Bonds", "percentage": 5, "color": "#94A3B8" }
+    ],
+    "expectedReturn": {
+      "1year": { "best": 30, "expected": 15.5, "worst": -15 },
+      "3years": { "best": 22, "expected": 14.8, "worst": -2 },
+      "5years": { "best": 20, "expected": 15.2, "worst": 5 }
+    },
+    "aiExplanation": "This portfolio is like a rocket ship. 85% of your money is in growth assets (stocks across sizes and geographies). It can get turbulent — you might see your portfolio drop 15-20% in a bad year. But here's the thing: in the last 20 years, every major crash has been followed by a bigger recovery. The 10% in gold is your parachute, and bonds are the safety net. If you can handle the ride, history says you'll be rewarded."
+  }
+}

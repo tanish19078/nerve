@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "question": "If your investments dropped 20% in a month, how would you react?",
+    "options": [
+      { "text": "Invest even more — great opportunity!", "score": 5, "profile": "aggressive" },
+      { "text": "Stay calm and hold my investments", "score": 4, "profile": "balanced" },
+      { "text": "Feel uncomfortable but probably hold", "score": 3, "profile": "balanced" },
+      { "text": "Feel very anxious and consider selling", "score": 2, "profile": "conservative" },
+      { "text": "Sell everything immediately", "score": 1, "profile": "conservative" }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "How long can you keep your money invested without needing it?",
+    "options": [
+      { "text": "10+ years — I'm in no rush", "score": 5, "profile": "aggressive" },
+      { "text": "5-10 years", "score": 4, "profile": "balanced" },
+      { "text": "3-5 years", "score": 3, "profile": "balanced" },
+      { "text": "1-3 years", "score": 2, "profile": "conservative" },
+      { "text": "Less than 1 year", "score": 1, "profile": "conservative" }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Which statement best describes your investment goal?",
+    "options": [
+      { "text": "Maximum growth — I can handle big swings", "score": 5, "profile": "aggressive" },
+      { "text": "Good growth with manageable risk", "score": 4, "profile": "balanced" },
+      { "text": "Steady growth with limited downside", "score": 3, "profile": "balanced" },
+      { "text": "Preserve my money with some growth", "score": 2, "profile": "conservative" },
+      { "text": "Don't lose any money, period", "score": 1, "profile": "conservative" }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "How much of your monthly income would you be comfortable investing?",
+    "options": [
+      { "text": "30% or more", "score": 5, "profile": "aggressive" },
+      { "text": "20-30%", "score": 4, "profile": "balanced" },
+      { "text": "10-20%", "score": 3, "profile": "balanced" },
+      { "text": "5-10%", "score": 2, "profile": "conservative" },
+      { "text": "Less than 5%", "score": 1, "profile": "conservative" }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Your friend made 50% returns on a risky stock. What do you think?",
+    "options": [
+      { "text": "I want in! Which stock?", "score": 5, "profile": "aggressive" },
+      { "text": "Interesting, but I'd do my own research first", "score": 4, "profile": "balanced" },
+      { "text": "Good for them, but that's too risky for me", "score": 3, "profile": "balanced" },
+      { "text": "That's basically gambling", "score": 2, "profile": "conservative" },
+      { "text": "They'll probably lose it all eventually", "score": 1, "profile": "conservative" }
+    ]
+  }
+]

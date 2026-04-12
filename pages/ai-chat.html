@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Nerve | AI Portfolio Explainer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#a3a6ff", "primary-dim": "#6063ee", "primary-container": "#9396ff",
+                    "on-primary": "#0f00a4", "on-primary-container": "#0a0081",
+                    "secondary": "#ac8aff", "secondary-dim": "#8455ef", "secondary-container": "#5516be",
+                    "on-secondary": "#280067", "on-secondary-container": "#d9c8ff",
+                    "tertiary": "#ffa5d9", "tertiary-dim": "#ef81c4", "on-tertiary": "#701455",
+                    "error": "#ff6e84", "error-dim": "#d73357",
+                    "background": "#060e20", "surface": "#060e20",
+                    "surface-bright": "#1f2b49", "surface-container-low": "#091328",
+                    "surface-container": "#0f1930", "surface-container-high": "#141f38",
+                    "surface-container-highest": "#192540", "surface-container-lowest": "#000000",
+                    "surface-variant": "#192540", "on-surface": "#dee5ff",
+                    "on-surface-variant": "#a3aac4", "on-background": "#dee5ff",
+                    "outline": "#6d758c", "outline-variant": "#40485d",
+                },
+                fontFamily: {
+                    headline: ["Space Grotesk", "Inter", "sans-serif"],
+                    body: ["Inter", "sans-serif"],
+                    mono: ["JetBrains Mono", "monospace"],
+                }
+            }
+        }
+    }
+    </script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #060e20; color: #dee5ff; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+    <!-- NAV -->
+    <nav class="shrink-0 flex justify-between items-center px-6 h-16 bg-[#091328] border-b border-[#40485d]/15 z-50">
+        <a href="/" class="text-xl font-bold font-headline bg-clip-text text-transparent bg-gradient-to-r from-[#a3a6ff] to-[#8455ef]">Nerve</a>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-[#a3aac4]">
+            <a href="dashboard.html" class="hover:text-[#dee5ff] transition-colors">Dashboard</a>
+            <a href="sandbox.html" class="hover:text-[#dee5ff] transition-colors">Simulations</a>
+            <span class="text-[#a3a6ff] font-bold border-b-2 border-[#a3a6ff] pb-1">AI Explainer</span>
+            <a href="probability.html" class="hover:text-[#dee5ff] transition-colors">Probability</a>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[#a3a6ff] cursor-pointer">notifications</span>
+            <div class="w-8 h-8 rounded-full bg-[#192540] border border-[#40485d]/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[#a3a6ff] text-sm">person</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN LAYOUT -->
+    <div class="flex flex-1 overflow-hidden">
+
+        <!-- SIDEBAR -->
+        <aside class="hidden md:flex w-64 shrink-0 flex-col bg-[#091328] border-r border-[#40485d]/15 py-6">
+            <div class="px-6 mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#a3a6ff] to-[#8455ef] flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[#0f00a4]">psychology</span>
+                    </div>
+                    <div>
+                        <p class="text-[#dee5ff] font-bold text-sm">Nerve AI</p>
+                        <p class="text-[#a3aac4] text-xs">Financial Educator</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="flex-1 space-y-1 px-3">
+                <a href="dashboard.html" class="flex items-center gap-3 text-[#a3aac4] px-3 py-3 rounded-xl hover:bg-[#0f1930] hover:text-[#dee5ff] transition-all text-sm">
+                    <span class="material-symbols-outlined text-xl">pie_chart</span> Portfolio
+                </a>
+                <div class="flex items-center gap-3 text-[#dee5ff] bg-[#192540] px-3 py-3 rounded-xl text-sm">
+                    <span class="material-symbols-outlined text-xl">psychology</span> AI Explainer
+                </div>
+                <a href="sandbox.html" class="flex items-center gap-3 text-[#a3aac4] px-3 py-3 rounded-xl hover:bg-[#0f1930] hover:text-[#dee5ff] transition-all text-sm">
+                    <span class="material-symbols-outlined text-xl">analytics</span> Simulations
+                </a>
+                <a href="probability.html" class="flex items-center gap-3 text-[#a3aac4] px-3 py-3 rounded-xl hover:bg-[#0f1930] hover:text-[#dee5ff] transition-all text-sm">
+                    <span class="material-symbols-outlined text-xl">speed</span> Probability
+                </a>
+                <a href="/" class="flex items-center gap-3 text-[#a3aac4] px-3 py-3 rounded-xl hover:bg-[#0f1930] hover:text-[#dee5ff] transition-all text-sm">
+                    <span class="material-symbols-outlined text-xl">home</span> Home
+                </a>
+            </nav>
+        </aside>
+
+        <!-- LEFT: PORTFOLIO CONTEXT -->
+        <section class="hidden lg:flex w-[320px] shrink-0 flex-col border-r border-[#40485d]/15 p-6 overflow-y-auto no-scrollbar gap-6 bg-[#060e20]">
+            <h2 class="text-xl font-bold font-headline text-[#dee5ff]">Your Portfolio</h2>
+
+            <!-- Allocation Ring -->
+            <div class="bg-[#0f1930]/60 rounded-xl p-5 border border-[#40485d]/10">
+                <div class="flex items-center justify-center mb-5 relative">
+                    <svg class="w-36 h-36 transform -rotate-90" viewBox="0 0 160 160">
+                        <circle cx="80" cy="80" r="65" fill="none" stroke="#192540" stroke-width="12"/>
+                        <circle cx="80" cy="80" r="65" fill="none" stroke="#a3a6ff" stroke-width="12" stroke-dasharray="408" stroke-dashoffset="265" stroke-linecap="round"/>
+                        <circle cx="80" cy="80" r="65" fill="none" stroke="#8455ef" stroke-width="12" stroke-dasharray="408" stroke-dashoffset="367" stroke-linecap="round" transform="rotate(126,80,80)"/>
+                        <circle cx="80" cy="80" r="65" fill="none" stroke="#ef81c4" stroke-width="12" stroke-dasharray="408" stroke-dashoffset="388" stroke-linecap="round" transform="rotate(162,80,80)"/>
+                    </svg>
+                    <div class="absolute flex flex-col items-center">
+                        <span class="text-[10px] text-[#a3aac4] uppercase tracking-widest font-bold">Value</span>
+                        <span class="text-lg font-bold font-mono text-[#dee5ff]">₹1,24,500</span>
+                    </div>
+                </div>
+                <div class="space-y-2.5">
+                    <div class="flex justify-between text-sm"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#a3a6ff]"></span><span class="text-[#a3aac4]">Nifty 50</span></span><span class="font-bold">35%</span></div>
+                    <div class="flex justify-between text-sm"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#8455ef]"></span><span class="text-[#a3aac4]">Mid Cap</span></span><span class="font-bold">15%</span></div>
+                    <div class="flex justify-between text-sm"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#ef81c4]"></span><span class="text-[#a3aac4]">Bonds</span></span><span class="font-bold">20%</span></div>
+                    <div class="flex justify-between text-sm"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#ff6e84]"></span><span class="text-[#a3aac4]">Gold</span></span><span class="font-bold">15%</span></div>
+                </div>
+            </div>
+
+            <!-- Risk Score -->
+            <div class="bg-[#0f1930]/60 rounded-xl p-5 border border-[#40485d]/10 flex items-center gap-5">
+                <div class="relative w-16 h-16 flex items-center justify-center shrink-0">
+                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 80 80">
+                        <circle cx="40" cy="40" r="32" fill="none" stroke="#192540" stroke-width="6"/>
+                        <circle cx="40" cy="40" r="32" fill="none" stroke="#a3a6ff" stroke-width="6" stroke-dasharray="201" stroke-dashoffset="100" stroke-linecap="round"/>
+                    </svg>
+                    <span class="absolute text-base font-bold font-mono">50</span>
+                </div>
+                <div>
+                    <p class="text-[10px] text-[#a3aac4] font-bold uppercase tracking-wider">Risk Score</p>
+                    <p class="text-lg font-bold text-[#a3a6ff]">Moderate</p>
+                </div>
+            </div>
+
+            <!-- ELI5 Toggle -->
+            <div class="bg-[#0f1930]/60 rounded-xl p-4 border border-[#40485d]/10 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-semibold">ELI5 Mode</span>
+                    <span class="text-[10px] text-[#a3aac4]">(Simple)</span>
+                </div>
+                <button id="eli5-toggle" class="relative w-11 h-6 rounded-full bg-[#192540] transition-colors cursor-pointer" onclick="toggleEli5()">
+                    <span id="eli5-handle" class="absolute top-1 left-1 w-4 h-4 rounded-full bg-[#a3aac4] transition-all"></span>
+                </button>
+            </div>
+
+            <!-- Prompt Starters -->
+            <div class="space-y-2">
+                <p class="text-[10px] font-bold text-[#a3aac4] uppercase tracking-widest">Quick Questions</p>
+                <button onclick="sendPrompt('What is my current risk level?')" class="w-full text-left p-3 text-sm rounded-xl border border-[#40485d]/20 hover:bg-[#192540] transition-colors">What is my risk? →</button>
+                <button onclick="sendPrompt('What happens if Nifty drops 20%?')" class="w-full text-left p-3 text-sm rounded-xl border border-[#40485d]/20 hover:bg-[#192540] transition-colors">What if Nifty drops 20%? →</button>
+                <button onclick="sendPrompt('Should I change my portfolio allocation?')" class="w-full text-left p-3 text-sm rounded-xl border border-[#40485d]/20 hover:bg-[#192540] transition-colors">Should I change anything? →</button>
+            </div>
+        </section>
+
+        <!-- RIGHT: CHAT PANEL -->
+        <section class="flex-1 flex flex-col bg-[#091328] relative">
+
+            <!-- Chat Header -->
+            <div class="shrink-0 px-6 py-4 border-b border-[#40485d]/10 flex items-center gap-3 bg-[#091328]">
+                <div class="w-10 h-10 rounded-full bg-[#8455ef]/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#ac8aff]">psychology</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-sm">Nerve AI</span>
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]"></span>
+                    </div>
+                    <p class="text-[11px] text-[#a3aac4]">Financial Educator · Portfolio-Aware</p>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar">
+                <!-- Welcome message -->
+                <div class="flex gap-3 max-w-2xl">
+                    <div class="w-8 h-8 rounded-full bg-[#8455ef]/20 flex items-center justify-center shrink-0 mt-1">
+                        <span class="material-symbols-outlined text-[#ac8aff] text-base">smart_toy</span>
+                    </div>
+                    <div class="bg-[#0f1930] p-4 rounded-2xl rounded-tl-sm border border-[#40485d]/10 text-sm leading-relaxed">
+                        Hi! I'm your Nerve AI financial educator. I can explain investing concepts, analyze your portfolio risk, and help you understand market movements — all in plain English. What would you like to know?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <div class="shrink-0 p-4 border-t border-[#40485d]/10 bg-[#091328]">
+                <div class="flex items-center gap-3 bg-[#0f1930] border border-[#40485d]/15 rounded-2xl px-4 py-1">
+                    <span class="material-symbols-outlined text-[#6d758c] text-xl">chat</span>
+                    <input
+                        id="chatInput"
+                        type="text"
+                        placeholder="Ask me anything about investing..."
+                        class="flex-1 bg-transparent border-none outline-none text-[#dee5ff] text-sm py-3 placeholder:text-[#6d758c]"
+                        onkeydown="if(event.key==='Enter'){event.preventDefault();sendMessage();}"
+                    />
+                    <button
+                        id="sendBtn"
+                        onclick="sendMessage()"
+                        class="w-10 h-10 rounded-xl bg-gradient-to-r from-[#a3a6ff] to-[#8455ef] flex items-center justify-center text-[#0f00a4] hover:brightness-110 active:scale-95 transition-all cursor-pointer shrink-0"
+                    >
+                        <span class="material-symbols-outlined text-xl">send</span>
+                    </button>
+                </div>
+                <p class="text-[10px] text-[#6d758c] text-center mt-2 tracking-wider uppercase">Educational purposes only · Not financial advice</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ALL JS INLINE — no external file dependency -->
+    <script>
+        // State
+        let eli5Mode = false;
+        let chatHistory = [];
+        const portfolio = localStorage.getItem('fearless_portfolio') || 'balanced';
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+
+        // ELI5 toggle
+        function toggleEli5() {
+            eli5Mode = !eli5Mode;
+            const toggle = document.getElementById('eli5-toggle');
+            const handle = document.getElementById('eli5-handle');
+            if (eli5Mode) {
+                toggle.style.backgroundColor = '#a3a6ff';
+                handle.style.left = '24px';
+                handle.style.backgroundColor = '#0f00a4';
+            } else {
+                toggle.style.backgroundColor = '#192540';
+                handle.style.left = '4px';
+                handle.style.backgroundColor = '#a3aac4';
+            }
+        }
+
+        // Add message bubble
+        function addMessage(text, isUser) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'flex gap-3 max-w-2xl ' + (isUser ? 'ml-auto flex-row-reverse' : '');
+
+            const avatar = document.createElement('div');
+            avatar.className = 'w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1 ' +
+                (isUser ? 'bg-[#a3a6ff]/20' : 'bg-[#8455ef]/20');
+            avatar.innerHTML = '<span class="material-symbols-outlined text-base ' +
+                (isUser ? 'text-[#a3a6ff]' : 'text-[#ac8aff]') + '">' +
+                (isUser ? 'person' : 'smart_toy') + '</span>';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'p-4 rounded-2xl border text-sm leading-relaxed whitespace-pre-wrap ' +
+                (isUser
+                    ? 'bg-[#a3a6ff]/10 border-[#a3a6ff]/20 rounded-tr-sm'
+                    : 'bg-[#0f1930] border-[#40485d]/10 rounded-tl-sm');
+            bubble.textContent = text;
+
+            wrapper.appendChild(avatar);
+            wrapper.appendChild(bubble);
+            chatMessages.appendChild(wrapper);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Add typing indicator
+        function addTyping() {
+            const wrapper = document.createElement('div');
+            wrapper.id = 'typingIndicator';
+            wrapper.className = 'flex gap-3 max-w-2xl';
+            wrapper.innerHTML = '<div class="w-8 h-8 rounded-full bg-[#8455ef]/20 flex items-center justify-center shrink-0 mt-1">' +
+                '<span class="material-symbols-outlined text-[#ac8aff] text-base">smart_toy</span></div>' +
+                '<div class="bg-[#0f1930] px-5 py-4 rounded-2xl rounded-tl-sm border border-[#40485d]/10 flex items-center gap-1.5">' +
+                '<span class="w-2 h-2 rounded-full bg-[#a3aac4]" style="animation:bounce 1s infinite"></span>' +
+                '<span class="w-2 h-2 rounded-full bg-[#a3aac4]" style="animation:bounce 1s infinite 0.15s"></span>' +
+                '<span class="w-2 h-2 rounded-full bg-[#a3aac4]" style="animation:bounce 1s infinite 0.3s"></span></div>';
+            chatMessages.appendChild(wrapper);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTyping() {
+            const el = document.getElementById('typingIndicator');
+            if (el) el.remove();
+        }
+
+        // Send message to /api/explain
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, true);
+            chatInput.value = '';
+            chatHistory.push({ role: 'user', content: text });
+
+            addTyping();
+
+            try {
+                const response = await fetch('/api/explain', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        question: text,
+                        mode: eli5Mode ? 'eli5' : 'normal',
+                        portfolio: portfolio,
+                        history: chatHistory
+                    })
+                });
+
+                removeTyping();
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const reply = data.explanation || 'Sorry, I could not generate a response.';
+                    addMessage(reply, false);
+                    chatHistory.push({ role: 'assistant', content: reply });
+                } else {
+                    addMessage('Something went wrong. Please try again.', false);
+                }
+            } catch (err) {
+                removeTyping();
+                addMessage('Could not reach the server. Please check if it is running.', false);
+                console.error('Chat error:', err);
+            }
+        }
+
+        // Prompt starter shortcut
+        function sendPrompt(text) {
+            chatInput.value = text;
+            sendMessage();
+        }
+    </script>
+</body>
+</html>

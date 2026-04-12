@@ -1,0 +1,176 @@
+{
+  "assetClasses": {
+    "fixed-deposit": {
+      "name": "Fixed Deposit (FD)",
+      "icon": "savings",
+      "color": "#94A3B8",
+      "description": "Bank fixed deposits with guaranteed returns",
+      "lossProbability": {
+        "1month": 0,
+        "3months": 0,
+        "6months": 0,
+        "1year": 0,
+        "3years": 0,
+        "5years": 0,
+        "10years": 0,
+        "15years": 0,
+        "20years": 0
+      },
+      "averageReturn": {
+        "1year": 6.5,
+        "3years": 6.8,
+        "5years": 7.0,
+        "10years": 7.2
+      },
+      "note": "FDs have zero loss probability but returns may not beat inflation."
+    },
+    "gold": {
+      "name": "Gold",
+      "icon": "diamond",
+      "color": "#F59E0B",
+      "description": "Physical gold or gold ETFs",
+      "lossProbability": {
+        "1month": 38,
+        "3months": 32,
+        "6months": 28,
+        "1year": 22,
+        "3years": 12,
+        "5years": 6,
+        "10years": 2,
+        "15years": 0,
+        "20years": 0
+      },
+      "averageReturn": {
+        "1year": 10.5,
+        "3years": 11.2,
+        "5years": 10.8,
+        "10years": 9.5
+      },
+      "note": "Gold is a traditional safe haven that tends to do well during market crashes."
+    },
+    "nifty50": {
+      "name": "Nifty 50 (Large Cap)",
+      "icon": "show_chart",
+      "color": "#6366F1",
+      "description": "India's top 50 companies by market cap",
+      "lossProbability": {
+        "1month": 42,
+        "3months": 36,
+        "6months": 30,
+        "1year": 28,
+        "3years": 14,
+        "5years": 8,
+        "10years": 2,
+        "15years": 0,
+        "20years": 0
+      },
+      "averageReturn": {
+        "1year": 13.5,
+        "3years": 12.8,
+        "5years": 12.2,
+        "10years": 11.8
+      },
+      "note": "Over any 15-year period in history, Nifty 50 has NEVER given negative returns."
+    },
+    "midcap": {
+      "name": "Mid Cap Index",
+      "icon": "rocket_launch",
+      "color": "#8B5CF6",
+      "description": "Medium-sized companies with higher growth potential",
+      "lossProbability": {
+        "1month": 45,
+        "3months": 40,
+        "6months": 35,
+        "1year": 32,
+        "3years": 18,
+        "5years": 10,
+        "10years": 3,
+        "15years": 0,
+        "20years": 0
+      },
+      "averageReturn": {
+        "1year": 16.2,
+        "3years": 15.5,
+        "5years": 14.8,
+        "10years": 14.2
+      },
+      "note": "Higher risk, higher reward. Mid caps are more volatile but have outperformed large caps over long periods."
+    },
+    "crypto": {
+      "name": "Cryptocurrency (Bitcoin)",
+      "icon": "currency_bitcoin",
+      "color": "#F97316",
+      "description": "Digital currencies like Bitcoin",
+      "lossProbability": {
+        "1month": 48,
+        "3months": 44,
+        "6months": 40,
+        "1year": 35,
+        "3years": 25,
+        "5years": 18,
+        "10years": 8,
+        "15years": 5,
+        "20years": 3
+      },
+      "averageReturn": {
+        "1year": 45.0,
+        "3years": 38.0,
+        "5years": 55.0,
+        "10years": 120.0
+      },
+      "note": "Extremely volatile. Can gain or lose 50%+ in a single year. Not recommended for beginners."
+    }
+  },
+  "relatableComparisons": [
+    {
+      "probability": 50,
+      "comparison": "the chance of getting heads when you flip a coin"
+    },
+    {
+      "probability": 42,
+      "comparison": "the chance of rain on any given day in Mumbai during monsoon"
+    },
+    {
+      "probability": 28,
+      "comparison": "the chance your food delivery arrives late"
+    },
+    {
+      "probability": 14,
+      "comparison": "the chance of your flight being delayed"
+    },
+    {
+      "probability": 8,
+      "comparison": "the chance of getting a flat tire this year"
+    },
+    {
+      "probability": 2,
+      "comparison": "the chance of being struck by lightning in your lifetime"
+    },
+    {
+      "probability": 0,
+      "comparison": "basically impossible — like finding a unicorn in your backyard"
+    }
+  ],
+  "historicalInsights": [
+    {
+      "horizon": "1year",
+      "insight": "In any given year, markets can be unpredictable. But zoom out..."
+    },
+    {
+      "horizon": "3years",
+      "insight": "Over 3 years, the odds start shifting dramatically in your favor."
+    },
+    {
+      "horizon": "5years",
+      "insight": "In 92% of 5-year periods, Nifty 50 has delivered positive returns."
+    },
+    {
+      "horizon": "10years",
+      "insight": "10 years of patience has historically meant near-certain positive returns."
+    },
+    {
+      "horizon": "15years",
+      "insight": "In the entire history of Nifty 50, there has been ZERO 15-year periods with negative returns."
+    }
+  ]
+}

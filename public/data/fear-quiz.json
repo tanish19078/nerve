@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "question": "When you hear the word 'investing', what's the FIRST emotion you feel?",
+    "options": [
+      { "text": "Excited — I want to grow my money!", "score": 1 },
+      { "text": "Curious — I want to learn more", "score": 2 },
+      { "text": "Nervous — What if I lose money?", "score": 3 },
+      { "text": "Terrified — I'd rather keep it in savings", "score": 4 }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Imagine you invested Rs. 10,000 and it dropped to Rs. 8,000 in a week. What would you do?",
+    "options": [
+      { "text": "Buy more — it's on sale!", "score": 1 },
+      { "text": "Wait and watch — markets go up and down", "score": 2 },
+      { "text": "Panic a little but hold on", "score": 3 },
+      { "text": "Sell immediately — I can't handle this!", "score": 4 }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What's the biggest reason you haven't started investing yet?",
+    "options": [
+      { "text": "I already invest!", "score": 1 },
+      { "text": "I don't know where to start", "score": 2 },
+      { "text": "I'm afraid of losing my hard-earned money", "score": 3 },
+      { "text": "I've seen others lose money and it scares me", "score": 4 }
+    ]
+  }
+]

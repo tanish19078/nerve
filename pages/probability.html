@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nerve | Risk Meter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ff8ed2",
+                    "surface": "#060e20",
+                    "secondary-dim": "#8455ef",
+                    "tertiary-fixed-dim": "#ef81c4",
+                    "on-tertiary": "#701455",
+                    "tertiary-container": "#ff8ed2",
+                    "on-error-container": "#ffb2b9",
+                    "secondary-fixed-dim": "#ceb9ff",
+                    "surface-container": "#0f1930",
+                    "surface-container-low": "#091328",
+                    "surface-bright": "#1f2b49",
+                    "inverse-surface": "#faf8ff",
+                    "error": "#ff6e84",
+                    "tertiary": "#ffa5d9",
+                    "inverse-primary": "#494bd7",
+                    "on-tertiary-fixed": "#3b002b",
+                    "inverse-on-surface": "#4d556b",
+                    "secondary-fixed": "#dac9ff",
+                    "surface-tint": "#a3a6ff",
+                    "primary-container": "#9396ff",
+                    "secondary-container": "#5516be",
+                    "outline": "#6d758c",
+                    "surface-dim": "#060e20",
+                    "secondary": "#ac8aff",
+                    "surface-container-lowest": "#000000",
+                    "on-background": "#dee5ff",
+                    "background": "#060e20",
+                    "on-secondary-fixed": "#40009b",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "primary-fixed": "#9396ff",
+                    "surface-container-high": "#141f38",
+                    "on-secondary-container": "#d9c8ff",
+                    "error-dim": "#d73357",
+                    "on-primary-fixed": "#000000",
+                    "primary": "#a3a6ff",
+                    "on-primary": "#0f00a4",
+                    "outline-variant": "#40485d",
+                    "on-error": "#490013",
+                    "on-primary-container": "#0a0081",
+                    "tertiary-dim": "#ef81c4",
+                    "on-secondary-fixed-variant": "#5f28c8",
+                    "on-secondary": "#280067",
+                    "on-surface": "#dee5ff",
+                    "primary-fixed-dim": "#8387ff",
+                    "on-tertiary-fixed-variant": "#6e1354",
+                    "primary-dim": "#6063ee",
+                    "on-surface-variant": "#a3aac4",
+                    "on-tertiary-container": "#63054a",
+                    "surface-variant": "#192540",
+                    "error-container": "#a70138",
+                    "surface-container-highest": "#192540"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(25, 37, 64, 0.4);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(163, 166, 255, 0.05);
+        }
+        .gauge-gradient {
+            background: conic-gradient(from 180deg at 50% 100%, #10b981 0deg, #facc15 90deg, #ef4444 180deg);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#060e20]/40 backdrop-blur-3xl shadow-[0_20px_60px_-15px_rgba(15,0,164,0.08)] flex justify-between items-center px-8 py-4 w-full">
+<div class="text-2xl font-black tracking-tighter text-[#dee5ff] font-headline">Nerve</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#a3aac4] hover:text-[#dee5ff] transition-colors font-['Inter'] tracking-tight leading-relaxed" href="#">Academy</a>
+<a class="text-[#a3aac4] hover:text-[#dee5ff] transition-colors font-['Inter'] tracking-tight leading-relaxed" href="#">Markets</a>
+<a class="text-[#a3aac4] hover:text-[#dee5ff] transition-colors font-['Inter'] tracking-tight leading-relaxed" href="#">Simulator</a>
+</div>
+<div class="flex gap-4 items-center">
+<button class="p-2 text-[#a3a6ff] hover:bg-[#1f2b49] rounded-lg transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-[#a3a6ff] hover:bg-[#1f2b49] rounded-lg transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex h-screen w-64 fixed left-0 top-0 z-40 bg-[#091328] flex-col py-20 gap-2">
+<div class="px-6 mb-8">
+<div class="text-xl font-bold text-[#dee5ff] mb-1">The Ledger</div>
+<div class="text-xs text-[#a3aac4] font-medium uppercase tracking-widest">Celestial Tier</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 text-[#a3aac4] px-4 py-3 mx-2 hover:bg-[#1f2b49] rounded-xl transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 bg-[#192540] text-[#a3a6ff] rounded-xl px-4 py-3 mx-2 active:translate-x-1" href="#">
+<span class="material-symbols-outlined">speed</span>
+<span class="font-['Inter'] font-medium text-sm">Risk Meter</span>
+</a>
+<a class="flex items-center gap-3 text-[#a3aac4] px-4 py-3 mx-2 hover:bg-[#1f2b49] rounded-xl transition-all active:translate-x-1" href="onboarding.html">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-['Inter'] font-medium text-sm">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 text-[#a3aac4] px-4 py-3 mx-2 hover:bg-[#1f2b49] rounded-xl transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-['Inter'] font-medium text-sm">Ledger</span>
+</a>
+<a class="flex items-center gap-3 text-[#a3aac4] px-4 py-3 mx-2 hover:bg-[#1f2b49] rounded-xl transition-all active:translate-x-1" href="index.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] font-medium text-sm">Settings</span>
+</a>
+</nav>
+
+</aside>
+<!-- Main Canvas -->
+<main class="md:ml-64 pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Hero: Probability Gauge -->
+<section class="flex flex-col items-center mb-16 relative">
+<!-- Decorative Particles -->
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/10 blur-[100px] rounded-full -z-10"></div>
+<div class="w-full max-w-xl text-center mb-12">
+<h1 class="text-4xl md:text-5xl font-black tracking-tight text-on-background mb-4">The Probability Gauge</h1>
+<p class="text-on-surface-variant text-lg">Understanding the mathematical reality of risk over time.</p>
+</div>
+<div class="relative w-80 h-44 md:w-[480px] md:h-[240px] mb-8">
+<!-- Semicircle Gauge -->
+<div class="absolute inset-0 overflow-hidden">
+<div class="w-80 h-80 md:w-[480px] md:h-[480px] rounded-full border-[32px] md:border-[48px] border-surface-container-high opacity-20"></div>
+<div class="absolute top-0 w-80 h-80 md:w-[480px] md:h-[480px] rounded-full border-[32px] md:border-[48px] border-transparent gauge-gradient rotate-[270deg]" style="clip-path: polygon(50% 0, 100% 0, 100% 50%, 50% 50%);"></div>
+</div>
+<!-- Needle -->
+<div id="gauge-needle" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 md:w-2 h-32 md:h-48 origin-bottom rotate-[-75deg] transition-transform duration-1000 ease-out" style="transform: translateX(-50%) rotate(-75deg);">
+<div class="w-full h-full bg-gradient-to-t from-transparent to-primary rounded-full relative">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-primary shadow-[0_0_20px_#a3a6ff] rounded-full"></div>
+</div>
+</div>
+<!-- Central Readout -->
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 text-center">
+<span id="gauge-readout" class="text-6xl md:text-8xl font-black text-on-background tracking-tighter">8%</span>
+</div>
+</div>
+<div class="text-center max-w-2xl px-4 mt-12">
+<p class="text-xl md:text-2xl font-bold text-on-surface mb-4">Chance of losing money with <span id="asset-name-text">Nifty 50</span> over <span id="horizon-text">5 years</span>: <span id="asset-prob-text" class="text-primary">Only 8%</span></p>
+<div class="inline-flex items-center gap-3 px-6 py-3 bg-surface-container rounded-full border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary">flight_takeoff</span>
+<span id="comparison-text" class="text-on-surface-variant text-sm md:text-base italic">That's lower than the chance of your flight being delayed!</span>
+</div>
+</div>
+</section>
+<!-- Time Horizon Slider -->
+<section class="glass-panel rounded-3xl p-8 md:p-12 mb-16">
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="text-2xl font-bold text-on-surface mb-2">Adjust Time Horizon</h2>
+<p class="text-on-surface-variant text-sm">See how time erodes market volatility.</p>
+</div>
+<div class="text-right">
+<span class="text-primary text-4xl font-black">5 Years</span>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest mt-1">Investment Period</p>
+</div>
+</div>
+<div class="relative py-8">
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[62%] bg-gradient-to-r from-primary to-secondary shadow-[0_0_15px_rgba(163,166,255,0.4)]"></div>
+</div>
+<div class="flex justify-between mt-6" id="horizon-buttons">
+<button data-horizon="1month" class="horizon-btn text-xs font-bold text-on-surface-variant/60 hover:text-on-surface transition-colors">1M</button>
+<button data-horizon="3months" class="horizon-btn text-xs font-bold text-on-surface-variant/60 hover:text-on-surface transition-colors">3M</button>
+<button data-horizon="6months" class="horizon-btn text-xs font-bold text-on-surface-variant/60 hover:text-on-surface transition-colors">6M</button>
+<button data-horizon="1year" class="horizon-btn text-xs font-bold text-on-surface-variant/60 hover:text-on-surface transition-colors">1Y</button>
+<button data-horizon="3years" class="horizon-btn text-xs font-bold text-on-surface-variant/60 hover:text-on-surface transition-colors">3Y</button>
+<button data-horizon="5years" class="horizon-btn px-4 py-1.5 bg-primary text-on-primary rounded-full text-xs font-black shadow-lg shadow-primary/20">5Y</button>
+<button data-horizon="10years" class="horizon-btn text-xs font-bold text-on-surface-variant/60 hover:text-on-surface transition-colors">10Y</button>
+<button data-horizon="15years" class="horizon-btn text-xs font-bold text-on-surface-variant/60 hover:text-on-surface transition-colors">15Y</button>
+<button data-horizon="20years" class="horizon-btn text-xs font-bold text-on-surface-variant/60 hover:text-on-surface transition-colors">20Y</button>
+</div>
+</div>
+<div class="mt-10 p-6 bg-surface-container-low rounded-2xl flex gap-6 items-start">
+<div class="bg-primary/10 p-3 rounded-xl">
+<span class="material-symbols-outlined text-primary" data-weight="fill">insights</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-1">Statistical Edge</h4>
+<p class="text-on-surface-variant leading-relaxed">Over 5 years, the odds shift dramatically in your favor. In 92% of 5-year periods, Nifty 50 has delivered positive returns. Short term noise disappears when you focus on long-term wealth cycles.</p>
+</div>
+</div>
+</section>
+<!-- Asset Comparison -->
+<section class="mb-16">
+<h2 class="text-2xl font-bold text-on-surface mb-8">Asset Class Benchmarks</h2>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4" id="asset-cards">
+<!-- Fixed Deposit -->
+<div data-asset="fixed-deposit" class="asset-card cursor-pointer glass-panel p-6 rounded-2xl border-transparent hover:border-outline-variant/20 transition-all group">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-outline-variant text-3xl">shield</span>
+<span class="text-xl font-black text-on-surface-variant">0%</span>
+</div>
+<h3 class="font-bold text-on-surface mb-2">Fixed Deposit</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-6 italic">"Zero risk, but may not beat inflation"</p>
+<div class="h-24 w-full bg-surface-container-low rounded-lg relative overflow-hidden flex items-end px-4">
+<div class="w-full bg-outline-variant/30 h-[2%] rounded-t-sm group-hover:h-[4%] transition-all"></div>
+</div>
+</div>
+<!-- Gold -->
+<div data-asset="gold" class="asset-card cursor-pointer glass-panel p-6 rounded-2xl border-transparent hover:border-outline-variant/20 transition-all group">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-yellow-500 text-3xl">diamond</span>
+<span class="text-xl font-black text-on-surface-variant">6%</span>
+</div>
+<h3 class="font-bold text-on-surface mb-2">Gold</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-6 italic">"Safe haven during market crashes"</p>
+<div class="h-24 w-full bg-surface-container-low rounded-lg relative overflow-hidden flex items-end px-4">
+<div class="w-full bg-yellow-500/40 h-[6%] rounded-t-sm group-hover:h-[8%] transition-all"></div>
+</div>
+</div>
+<!-- Nifty 50 (Selected) -->
+<div data-asset="nifty50" class="asset-card cursor-pointer bg-primary/10 p-6 rounded-2xl ring-2 ring-primary ring-offset-4 ring-offset-surface relative overflow-hidden transition-all group shadow-2xl shadow-primary/10">
+<div class="absolute top-0 right-0 p-2">
+<div class="bg-primary text-on-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">Your Focus</div>
+</div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">trending_up</span>
+<span class="text-xl font-black text-primary">8%</span>
+</div>
+<h3 class="font-bold text-on-surface mb-2">Nifty 50</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-6 italic">"Large cap stability &amp; blue-chip power"</p>
+<div class="h-24 w-full bg-surface-container rounded-lg relative overflow-hidden flex items-end px-4">
+<div class="w-full bg-primary h-[8%] rounded-t-sm group-hover:h-[10%] transition-all shadow-[0_0_10px_rgba(163,166,255,0.6)]"></div>
+</div>
+</div>
+<!-- Mid Cap -->
+<div data-asset="midcap" class="asset-card cursor-pointer glass-panel p-6 rounded-2xl border-transparent hover:border-outline-variant/20 transition-all group">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-secondary text-3xl">rocket_launch</span>
+<span class="text-xl font-black text-on-surface-variant">10%</span>
+</div>
+<h3 class="font-bold text-on-surface mb-2">Mid Cap</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-6 italic">"Higher risk, higher growth potential"</p>
+<div class="h-24 w-full bg-surface-container-low rounded-lg relative overflow-hidden flex items-end px-4">
+<div class="w-full bg-secondary/40 h-[10%] rounded-t-sm group-hover:h-[12%] transition-all"></div>
+</div>
+</div>
+<!-- Crypto -->
+<div data-asset="crypto" class="asset-card cursor-pointer glass-panel p-6 rounded-2xl border-transparent hover:border-outline-variant/20 transition-all group">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-orange-500 text-3xl">currency_bitcoin</span>
+<span class="text-xl font-black text-on-surface-variant">18%</span>
+</div>
+<h3 class="font-bold text-on-surface mb-2">Crypto</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-6 italic">"Extremely volatile &amp; speculative"</p>
+<div class="h-24 w-full bg-surface-container-low rounded-lg relative overflow-hidden flex items-end px-4">
+<div class="w-full bg-orange-500/40 h-[18%] rounded-t-sm group-hover:h-[20%] transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Historical Context -->
+<section class="glass-panel rounded-3xl p-8 md:p-12 overflow-hidden relative">
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary/5 blur-[80px] rounded-full -mr-20 -mt-20"></div>
+<div class="max-w-3xl mb-12 relative z-10">
+<h2 class="text-3xl md:text-4xl font-black text-on-surface mb-6 leading-tight">In the ENTIRE history of Nifty 50, there have been <span class="text-primary">ZERO</span> 15-year periods with negative returns</h2>
+<p class="text-on-surface-variant text-lg">The secret to wealth isn't timing the market, it's time IN the market. Probability of loss decays exponentially the longer you hold.</p>
+</div>
+<div class="grid grid-cols-5 gap-4 md:gap-8 items-end h-64 border-b border-outline-variant/20 relative z-10">
+<!-- 1yr -->
+<div class="flex flex-col items-center gap-4">
+<span class="text-xs font-bold text-error">28%</span>
+<div class="w-full max-w-[40px] bg-error-dim rounded-t-lg h-[100%] shadow-lg shadow-error/10"></div>
+<span class="text-[10px] md:text-xs font-black text-on-surface-variant uppercase mt-2">1 Year</span>
+</div>
+<!-- 3yr -->
+<div class="flex flex-col items-center gap-4">
+<span class="text-xs font-bold text-orange-400">14%</span>
+<div class="w-full max-w-[40px] bg-orange-400/60 rounded-t-lg h-[50%]"></div>
+<span class="text-[10px] md:text-xs font-black text-on-surface-variant uppercase mt-2">3 Years</span>
+</div>
+<!-- 5yr -->
+<div class="flex flex-col items-center gap-4">
+<span class="text-xs font-bold text-yellow-400">8%</span>
+<div class="w-full max-w-[40px] bg-yellow-400/40 rounded-t-lg h-[28%]"></div>
+<span class="text-[10px] md:text-xs font-black text-on-surface-variant uppercase mt-2">5 Years</span>
+</div>
+<!-- 10yr -->
+<div class="flex flex-col items-center gap-4">
+<span class="text-xs font-bold text-green-300">2%</span>
+<div class="w-full max-w-[40px] bg-green-300/30 rounded-t-lg h-[7%]"></div>
+<span class="text-[10px] md:text-xs font-black text-on-surface-variant uppercase mt-2">10 Years</span>
+</div>
+<!-- 15yr -->
+<div class="flex flex-col items-center gap-4">
+<span class="text-xs font-black text-green-500">0%</span>
+<div class="w-full max-w-[40px] bg-green-500 rounded-t-sm h-[2%] shadow-[0_-10px_20px_rgba(34,197,94,0.3)]"></div>
+<span class="text-[10px] md:text-xs font-black text-on-surface uppercase mt-2">15 Years</span>
+</div>
+</div>
+<div class="mt-12 flex flex-col md:flex-row gap-8 justify-between items-center relative z-10">
+<div class="flex -space-x-3">
+<img alt="User" class="w-10 h-10 rounded-full ring-2 ring-surface" data-alt="portrait of smiling professional male investor in a modern office environment with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0e-ckAYFN4pTQYoJSEzA_PsSPHo7eQ6cnI2_VT48BoXQGSZ54xW-St4CMiGc1xbPTDI8ppDWFPZ5hct2JZ0Tvhj2b6LGyd0nJ_CnQFl-sBrgJOMdIGAl927gIb0w2QIAau8_vjYetHDCSawxMOEgxgp4B3hre61DMOpGtjZ8wkRiZudlRZeTiU-5yQih1BpsPls_y2yaWjtRk7GrXEhBd7iwpEnGDC7HzBggSxac6z90-AGLqjMcksHkUwFfSXPbNCNzZq7-RfPg"/>
+<img alt="User" class="w-10 h-10 rounded-full ring-2 ring-surface" data-alt="confident professional woman with a soft smile against a minimalist studio background in cool tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCozkf1rYXCvEa83sZxBYB9c0W80hzUSwE_zlbI0fQL7uqLRrKzoIvAI14LzBW3qxRyxkk1LvGtxMZNejk4gShJGS4d31upaUkOXg72JsxotM20s2dqG0uq8nIjhLmZYwgdJ-KbfJrwgEq_TdZATvgTpWnLEzoT2O0qqnDWpH4NCNAfyDesDIXW0azoYFkLcXUOQ6XA_9VbEhhG2F_QYsrhIIpUxj0i8GaN3-EHLqbwSsm-I7ehc9-v13L6AiSeu3JThAskwWfzGF4"/>
+<img alt="User" class="w-10 h-10 rounded-full ring-2 ring-surface" data-alt="middle aged man with thoughtful expression in a contemporary workspace with subtle bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS3LHWEa1KPPpLLsYU7Bqy8CZXGm7IbtwpwQ8nDDWdhM7wdQHdCDiRq4W6xfqdtjYAOfDHVbUIgZF2xNj6E4IdAJzWo7gLQWSIKL2KgFCD0nzvgtZMHt10BqNnnFhJXt69GxfALmfw3TG6Eh0bDZ6ieFZgjkLKvDYd3XnIvKTAK2Le0-NxfyKwTR7KaGIB1tuRJe-UdtJZcEaVixSy14QdrofJiaJQ11hEtgQC2hdGey0JOBkhcix76nupINJSpQC7WcjqDQtyw2w"/>
+<div class="w-10 h-10 rounded-full ring-2 ring-surface bg-surface-bright flex items-center justify-center text-[10px] font-black">+12k</div>
+</div>
+<p class="text-sm text-on-surface-variant text-center md:text-right">Join thousands of fearless investors who stopped guessing and started calculating.</p>
+<button class="px-8 py-4 bg-surface-bright hover:bg-surface-container-highest text-on-surface font-bold rounded-2xl transition-all border border-outline-variant/20 active:scale-95 whitespace-nowrap">
+                    Download Full Ledger Report
+                </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low/80 backdrop-blur-xl border-t border-outline-variant/10 px-4 py-3 flex justify-between items-center z-50">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">speed</span>
+<span class="text-[10px] font-bold">Risk</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-[10px] font-medium">Assets</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="text-[10px] font-medium">Academy</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</nav>
+<script src="/public/js/probability.js"></script>
+</body></html>

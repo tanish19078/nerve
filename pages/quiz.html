@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fear Assessment Quiz | Nerve</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#0a0081",
+                        "surface": "#060e20",
+                        "surface-tint": "#a3a6ff",
+                        "surface-container": "#0f1930",
+                        "surface-bright": "#1f2b49",
+                        "primary-dim": "#6063ee",
+                        "error": "#ff6e84",
+                        "surface-variant": "#192540",
+                        "secondary-fixed-dim": "#ceb9ff",
+                        "error-dim": "#d73357",
+                        "on-error": "#490013",
+                        "outline-variant": "#40485d",
+                        "tertiary-dim": "#ef81c4",
+                        "surface-dim": "#060e20",
+                        "on-tertiary-container": "#63054a",
+                        "on-surface": "#dee5ff",
+                        "inverse-primary": "#494bd7",
+                        "tertiary-fixed-dim": "#ef81c4",
+                        "on-tertiary-fixed": "#3b002b",
+                        "primary-fixed-dim": "#8387ff",
+                        "primary-container": "#9396ff",
+                        "primary": "#a3a6ff",
+                        "primary-fixed": "#9396ff",
+                        "on-secondary": "#280067",
+                        "secondary-dim": "#8455ef",
+                        "on-secondary-fixed": "#40009b",
+                        "secondary": "#ac8aff",
+                        "error-container": "#a70138",
+                        "outline": "#6d758c",
+                        "on-secondary-fixed-variant": "#5f28c8",
+                        "tertiary-container": "#ff8ed2",
+                        "on-tertiary": "#701455",
+                        "on-tertiary-fixed-variant": "#6e1354",
+                        "inverse-on-surface": "#4d556b",
+                        "on-surface-variant": "#a3aac4",
+                        "tertiary": "#ffa5d9",
+                        "on-primary": "#0f00a4",
+                        "on-secondary-container": "#d9c8ff",
+                        "tertiary-fixed": "#ff8ed2",
+                        "on-primary-fixed-variant": "#0e009d",
+                        "surface-container-highest": "#192540",
+                        "secondary-container": "#5516be",
+                        "inverse-surface": "#faf8ff",
+                        "surface-container-low": "#091328",
+                        "surface-container-high": "#141f38",
+                        "secondary-fixed": "#dac9ff",
+                        "on-background": "#dee5ff",
+                        "surface-container-lowest": "#000000",
+                        "on-primary-fixed": "#000000",
+                        "on-error-container": "#ffb2b9",
+                        "background": "#060e20"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #060e20; }
+        .glass-card {
+            background: rgba(25, 37, 64, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(163, 170, 196, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-x-hidden min-h-screen">
+<!-- Background Orbs -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]"></div>
+<div class="absolute bottom-[5%] right-[-5%] w-[35%] h-[35%] rounded-full bg-secondary-dim/10 blur-[100px]"></div>
+<div class="absolute top-[20%] right-[15%] w-[10%] h-[10%] rounded-full bg-tertiary-dim/5 blur-[60px]"></div>
+</div>
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-50 bg-[#060e20]/80 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,0,164,0.08)]">
+<div class="flex justify-between items-center px-6 py-4 max-w-full">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-[#dee5ff] font-inter tracking-tight">Nerve</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-[#a3aac4] hover:text-[#a3a6ff] transition-colors duration-300 ease-in-out font-inter text-sm" href="dashboard.html">Dashboard</a>
+<a class="text-[#a3a6ff] font-bold border-b-2 border-[#a3a6ff] pb-1 font-inter text-sm transition-colors duration-300 ease-in-out" href="quiz.html">Assessment</a>
+<a class="text-[#a3aac4] hover:text-[#a3a6ff] transition-colors duration-300 ease-in-out font-inter text-sm" href="sandbox.html">Sandbox</a>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-[#a3a6ff] p-2 rounded-full hover:bg-surface-variant transition-colors">account_circle</button>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-72px)]">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col gap-2 py-8 h-screen w-64 sticky top-[72px] bg-[#060e20] border-r border-[#40485d]/15">
+<div class="px-6 mb-8">
+<h3 class="text-lg font-black text-[#dee5ff]">Investor Profile</h3>
+<p class="text-xs text-on-surface-variant/70">Risk Level: Assessing</p>
+</div>
+<nav class="flex flex-col gap-1 px-2">
+<a class="bg-[#192540] text-[#dee5ff] rounded-lg flex items-center gap-3 px-4 py-3 transition-all duration-200" href="quiz.html">
+<span class="material-symbols-outlined text-sm">quiz</span>
+<span class="font-inter text-sm">Assessment</span>
+</a>
+<a class="text-[#a3aac4] hover:bg-[#0f1930] hover:text-[#dee5ff] rounded-lg flex items-center gap-3 px-4 py-3 transition-all duration-200" href="sandbox.html">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="font-inter text-sm">Sandbox</span>
+</a>
+<a class="text-[#a3aac4] hover:bg-[#0f1930] hover:text-[#dee5ff] rounded-lg flex items-center gap-3 px-4 py-3 transition-all duration-200" href="ai-chat.html">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+<span class="font-inter text-sm">AI Explainer</span>
+</a>
+<a class="text-[#a3aac4] hover:bg-[#0f1930] hover:text-[#dee5ff] rounded-lg flex items-center gap-3 px-4 py-3 transition-all duration-200" href="probability.html">
+<span class="material-symbols-outlined text-sm">speed</span>
+<span class="font-inter text-sm">Probability</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 relative z-10 p-6 md:p-12 flex flex-col items-center">
+<!-- Progress Section -->
+<div class="w-full max-w-2xl mb-12">
+<div class="flex justify-between items-end mb-4">
+<span id="question-progress" class="text-on-surface-variant text-sm font-medium">Question 1 of 3</span>
+<span class="text-primary font-bold text-xs tracking-widest uppercase">Mindset Audit</span>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div id="progress-bar-inner" class="h-full bg-gradient-to-r from-primary to-secondary w-1/3 rounded-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Quiz Card -->
+<div class="w-full max-w-2xl glass-card rounded-xl p-8 md:p-10 shadow-2xl">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<h1 class="text-2xl md:text-3xl font-bold tracking-tight text-on-surface">Let's understand your investing mindset</h1>
+</div>
+<p id="question-text" class="text-lg md:text-xl text-on-surface-variant mb-10 leading-relaxed font-medium">
+                    When you hear the word <span class="text-on-surface border-b border-primary/40 italic px-1">"investing"</span>, what's the FIRST emotion you feel?
+                </p>
+<!-- Options Grid -->
+<div id="options-grid" class="space-y-4">
+</div>
+<!-- Footer Actions -->
+<div class="mt-12 flex flex-col items-center gap-6">
+<button id="next-btn" disabled class="w-full py-4 px-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold text-lg cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2">
+                        Next
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<a href="dashboard.html" class="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium tracking-wide">
+                        Skip Quiz
+                    </a>
+</div>
+</div>
+<!-- Footer Quote -->
+<div class="mt-16 text-center max-w-md">
+<p class="text-on-surface-variant/60 text-sm italic">
+                    "Investing is not about being fearless, it's about making decisions while managing fear."
+                </p>
+</div>
+</main>
+</div>
+<!-- Background Decoration Image -->
+<div class="fixed bottom-0 right-0 p-8 opacity-20 hidden lg:block">
+<img alt="Calm Aesthetic" class="w-64 grayscale contrast-125" data-alt="abstract architectural geometry with smooth curves and soft lighting representing a modern minimalist space of clarity and calm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCybtyBA-wNNIzM8iRO3nRJ24OE4dKj69mYgyUn7ywuf0Kh_oJe6Ic2aiNHTZzlquwYBUHMjB5QHdzSdxeovAkFzo_UdiXKYf1_77RJnvulFK7d8Sm6WDuBdPXMYhjlafxkYCAW3qdmo-_kqglcSQ_GO2oTuuoLxE8hHdCXcqzRjrw2jkYcCD88RN8yph0BCntYGnWbtwgwJCIt19uAVm-E_bhiC64ngJ8SDBKjaR31X2b9gZ8IpgQCAwpGyNfiwxQ0wY0IRtxAPhM"/>
+</div>
+<script src="/public/js/quiz.js"></script>
+</body></html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dream Portfolio Builder | Nerve</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: { extend: {
+            colors: {
+                "primary":"#a3a6ff","primary-dim":"#6063ee","on-primary":"#0f00a4",
+                "secondary":"#ac8aff","secondary-dim":"#8455ef","on-secondary":"#280067",
+                "tertiary":"#ffa5d9","tertiary-dim":"#ef81c4",
+                "error":"#ff6e84","error-dim":"#d73357",
+                "background":"#060e20","surface":"#060e20",
+                "surface-bright":"#1f2b49","surface-container-low":"#091328",
+                "surface-container":"#0f1930","surface-container-high":"#141f38",
+                "surface-container-highest":"#192540","surface-variant":"#192540",
+                "on-surface":"#dee5ff","on-surface-variant":"#a3aac4",
+                "outline":"#6d758c","outline-variant":"#40485d"
+            },
+            fontFamily: { headline:["Space Grotesk","Inter"], body:["Inter"], mono:["JetBrains Mono"] }
+        }}
+    }
+    </script>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Inter',sans-serif;background:#060e20;color:#dee5ff}
+        h1,h2,h3{font-family:'Space Grotesk',sans-serif}
+        .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+        .glass{background:rgba(15,25,48,0.5);backdrop-filter:blur(20px);border:1px solid rgba(64,72,93,0.12)}
+        input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:99px;background:#192540;outline:none}
+        input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#a3a6ff;cursor:pointer;box-shadow:0 0 10px rgba(163,166,255,0.5)}
+        .ring-chart{transition:stroke-dashoffset 0.6s cubic-bezier(0.4,0,0.2,1)}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+        .fade-up{animation:fadeUp 0.5s ease-out forwards}
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- NAV -->
+    <nav class="sticky top-0 z-50 flex justify-between items-center px-8 h-16 bg-[#060e20]/80 backdrop-blur-2xl border-b border-[#40485d]/10">
+        <a href="/" class="text-2xl font-black tracking-tighter font-headline bg-clip-text text-transparent bg-gradient-to-r from-[#a3a6ff] to-[#8455ef]">Nerve</a>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-[#a3aac4]">
+            <a href="dashboard.html" class="hover:text-[#dee5ff] transition-colors">Dashboard</a>
+            <a href="sandbox.html" class="hover:text-[#dee5ff] transition-colors">Simulations</a>
+            <a href="ai-chat.html" class="hover:text-[#dee5ff] transition-colors">AI Explainer</a>
+            <span class="text-[#a3a6ff] font-bold border-b-2 border-[#a3a6ff] pb-1">Dream Portfolio</span>
+        </div>
+        <a href="quiz.html" class="bg-gradient-to-r from-[#a3a6ff] to-[#8455ef] px-6 py-2.5 rounded-full text-[#0f00a4] font-bold text-sm active:scale-95 transition-all">Get Started</a>
+    </nav>
+
+    <!-- HERO -->
+    <header class="text-center px-8 py-20 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#a3a6ff]/5 rounded-full blur-[150px]"></div>
+        <div class="relative z-10">
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-4">
+                Build Your <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#a3a6ff] to-[#ef81c4]">Dream Portfolio</span>
+            </h1>
+            <p class="text-lg text-[#a3aac4] max-w-xl mx-auto">Drag the sliders to design your ideal asset allocation. See projected returns, risk analysis, and historical performance — all in real time.</p>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="max-w-7xl mx-auto px-8 pb-20">
+        <div class="grid lg:grid-cols-[1fr_400px] gap-10">
+
+            <!-- LEFT: ALLOCATION SLIDERS -->
+            <section class="space-y-8">
+                <!-- Investment Amount -->
+                <div class="glass rounded-2xl p-8">
+                    <h2 class="text-xl font-bold mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-[#a3a6ff]" style="font-variation-settings:'FILL' 1">savings</span>
+                        Investment Capital
+                    </h2>
+                    <div class="flex items-end gap-6">
+                        <div class="flex-1">
+                            <label class="text-xs text-[#a3aac4] uppercase tracking-widest font-bold mb-2 block">Total Amount (₹)</label>
+                            <input id="totalAmount" type="number" value="500000" min="10000" max="100000000" step="10000"
+                                class="w-full bg-[#192540] border border-[#40485d]/20 rounded-xl px-5 py-4 text-2xl font-mono font-bold text-[#dee5ff] focus:outline-none focus:border-[#a3a6ff]/50"
+                                oninput="recalculate()" />
+                        </div>
+                        <div class="flex gap-2 pb-1">
+                            <button onclick="setAmount(100000)" class="px-3 py-2 rounded-lg bg-[#192540] text-xs font-bold text-[#a3aac4] hover:bg-[#1f2b49] transition-colors">₹1L</button>
+                            <button onclick="setAmount(500000)" class="px-3 py-2 rounded-lg bg-[#a3a6ff]/10 text-xs font-bold text-[#a3a6ff] hover:bg-[#a3a6ff]/20 transition-colors">₹5L</button>
+                            <button onclick="setAmount(1000000)" class="px-3 py-2 rounded-lg bg-[#192540] text-xs font-bold text-[#a3aac4] hover:bg-[#1f2b49] transition-colors">₹10L</button>
+                            <button onclick="setAmount(5000000)" class="px-3 py-2 rounded-lg bg-[#192540] text-xs font-bold text-[#a3aac4] hover:bg-[#1f2b49] transition-colors">₹50L</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asset Sliders -->
+                <div class="glass rounded-2xl p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#8455ef]" style="font-variation-settings:'FILL' 1">tune</span>
+                            Asset Allocation
+                        </h2>
+                        <div id="allocationWarning" class="text-xs font-bold px-3 py-1.5 rounded-full hidden">—</div>
+                    </div>
+                    <div class="space-y-8" id="sliderContainer">
+                        <!-- Each asset row -->
+                    </div>
+                </div>
+
+                <!-- Time Horizon -->
+                <div class="glass rounded-2xl p-8">
+                    <h2 class="text-xl font-bold mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-[#ef81c4]" style="font-variation-settings:'FILL' 1">schedule</span>
+                        Investment Horizon
+                    </h2>
+                    <div class="flex items-center gap-6">
+                        <input id="horizonSlider" type="range" min="1" max="30" value="10" class="flex-1" oninput="recalculate()"/>
+                        <div class="text-right min-w-[80px]">
+                            <span id="horizonValue" class="text-3xl font-bold font-mono text-[#a3a6ff]">10</span>
+                            <span class="text-sm text-[#a3aac4] ml-1">years</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-3 text-[10px] text-[#6d758c] font-mono uppercase tracking-widest">
+                        <span>1 Year</span>
+                        <span>5</span>
+                        <span>10</span>
+                        <span>15</span>
+                        <span>20</span>
+                        <span>30 Years</span>
+                    </div>
+                </div>
+
+                <!-- Historical Insight -->
+                <div class="glass rounded-2xl p-8 border-l-4 border-[#8455ef]">
+                    <h3 class="font-bold mb-4 flex items-center gap-2 text-[#ac8aff]">
+                        <span class="material-symbols-outlined text-base">auto_awesome</span>
+                        Historical Insight
+                    </h3>
+                    <p id="historicalInsight" class="text-sm text-[#a3aac4] leading-relaxed">
+                        Adjust your allocation to see historical insights tailored to your portfolio.
+                    </p>
+                </div>
+            </section>
+
+            <!-- RIGHT: LIVE PREVIEW -->
+            <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
+
+                <!-- Donut Chart -->
+                <div class="glass rounded-2xl p-8 text-center relative overflow-hidden">
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#a3a6ff]/5 rounded-full blur-[60px]"></div>
+                    <h3 class="text-xs uppercase tracking-[0.2em] font-bold text-[#a3aac4] mb-6">Your Dream Portfolio</h3>
+                    <div class="relative mx-auto w-52 h-52 mb-6">
+                        <svg viewBox="0 0 200 200" class="w-full h-full transform -rotate-90">
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#192540" stroke-width="18"/>
+                            <circle id="ring-equity" cx="100" cy="100" r="80" fill="none" stroke="#a3a6ff" stroke-width="18" stroke-dasharray="502.65" stroke-dashoffset="502.65" stroke-linecap="round" class="ring-chart"/>
+                            <circle id="ring-gold" cx="100" cy="100" r="80" fill="none" stroke="#f59e0b" stroke-width="18" stroke-dasharray="502.65" stroke-dashoffset="502.65" stroke-linecap="round" class="ring-chart"/>
+                            <circle id="ring-bonds" cx="100" cy="100" r="80" fill="none" stroke="#8455ef" stroke-width="18" stroke-dasharray="502.65" stroke-dashoffset="502.65" stroke-linecap="round" class="ring-chart"/>
+                            <circle id="ring-realestate" cx="100" cy="100" r="80" fill="none" stroke="#ef81c4" stroke-width="18" stroke-dasharray="502.65" stroke-dashoffset="502.65" stroke-linecap="round" class="ring-chart"/>
+                            <circle id="ring-crypto" cx="100" cy="100" r="80" fill="none" stroke="#ff6e84" stroke-width="18" stroke-dasharray="502.65" stroke-dashoffset="502.65" stroke-linecap="round" class="ring-chart"/>
+                            <circle id="ring-cash" cx="100" cy="100" r="80" fill="none" stroke="#6d758c" stroke-width="18" stroke-dasharray="502.65" stroke-dashoffset="502.65" stroke-linecap="round" class="ring-chart"/>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-[10px] text-[#a3aac4] uppercase tracking-widest font-bold">Total</span>
+                            <span id="totalDisplay" class="text-xl font-bold font-mono">₹5,00,000</span>
+                        </div>
+                    </div>
+                    <!-- Legend -->
+                    <div id="donutLegend" class="space-y-2 text-left"></div>
+                </div>
+
+                <!-- Projected Returns -->
+                <div class="glass rounded-2xl p-6 space-y-4">
+                    <h3 class="text-xs uppercase tracking-[0.2em] font-bold text-[#a3aac4]">Projected Value</h3>
+                    <div class="flex items-end gap-3">
+                        <span id="projectedValue" class="text-3xl font-bold font-mono text-[#10b981]">—</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-[#192540]/50 rounded-xl p-3">
+                            <p class="text-[10px] text-[#a3aac4] uppercase tracking-widest font-bold">CAGR</p>
+                            <p id="projectedCAGR" class="text-lg font-bold font-mono text-[#a3a6ff]">—</p>
+                        </div>
+                        <div class="bg-[#192540]/50 rounded-xl p-3">
+                            <p class="text-[10px] text-[#a3aac4] uppercase tracking-widest font-bold">Total Growth</p>
+                            <p id="projectedGrowth" class="text-lg font-bold font-mono text-[#10b981]">—</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-[#192540]/50 rounded-xl p-3">
+                            <p class="text-[10px] text-[#a3aac4] uppercase tracking-widest font-bold">Risk Level</p>
+                            <p id="riskLevel" class="text-lg font-bold">—</p>
+                        </div>
+                        <div class="bg-[#192540]/50 rounded-xl p-3">
+                            <p class="text-[10px] text-[#a3aac4] uppercase tracking-widest font-bold">Max Drawdown</p>
+                            <p id="maxDrawdown" class="text-lg font-bold font-mono text-[#ff6e84]">—</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="space-y-3">
+                    <button onclick="saveDreamPortfolio()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-[#a3a6ff] to-[#8455ef] text-[#0f00a4] font-black text-sm uppercase tracking-widest hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">bookmark</span>
+                        Save Dream Portfolio
+                    </button>
+                    <button onclick="simulateDream()" class="w-full py-4 rounded-2xl border-2 border-[#40485d] text-[#dee5ff] font-bold text-sm uppercase tracking-widest hover:bg-[#192540] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">play_arrow</span>
+                        Simulate This Portfolio
+                    </button>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+    // ─── Asset Definitions ────────────────────────────────────────────────
+    const assets = [
+        { id: 'equity',     name: 'Equity (Nifty 50)',  icon: 'show_chart',    color: '#a3a6ff', expectedReturn: 12.5, risk: 18,  maxDrawdown: 38, defaultPct: 40 },
+        { id: 'gold',       name: 'Gold',               icon: 'diamond',       color: '#f59e0b', expectedReturn: 8.0,  risk: 8,   maxDrawdown: 15, defaultPct: 15 },
+        { id: 'bonds',      name: 'Bonds & Debt',       icon: 'account_balance',color:'#8455ef', expectedReturn: 6.5,  risk: 3,   maxDrawdown: 5,  defaultPct: 20 },
+        { id: 'realestate', name: 'Real Estate / REITs', icon: 'apartment',    color: '#ef81c4', expectedReturn: 9.0,  risk: 12,  maxDrawdown: 25, defaultPct: 10 },
+        { id: 'crypto',     name: 'Crypto',             icon: 'currency_bitcoin',color:'#ff6e84',expectedReturn: 25.0, risk: 60,  maxDrawdown: 75, defaultPct: 5  },
+        { id: 'cash',       name: 'Cash / Savings',     icon: 'savings',       color: '#6d758c', expectedReturn: 4.0,  risk: 0,   maxDrawdown: 0,  defaultPct: 10 }
+    ];
+
+    let allocations = {};
+    assets.forEach(a => allocations[a.id] = a.defaultPct);
+
+    // ─── Build Slider UI ──────────────────────────────────────────────────
+    function buildSliders() {
+        const container = document.getElementById('sliderContainer');
+        container.innerHTML = '';
+        assets.forEach(asset => {
+            const row = document.createElement('div');
+            row.className = 'fade-up';
+            row.innerHTML = `
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${asset.color}15">
+                            <span class="material-symbols-outlined" style="color:${asset.color};font-variation-settings:'FILL' 1">${asset.icon}</span>
+                        </div>
+                        <div>
+                            <span class="text-sm font-bold">${asset.name}</span>
+                            <span class="text-[10px] text-[#6d758c] ml-2">~${asset.expectedReturn}% CAGR</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="val-${asset.id}" class="text-lg font-bold font-mono" style="color:${asset.color}">${allocations[asset.id]}%</span>
+                        <span id="amt-${asset.id}" class="text-xs text-[#6d758c] font-mono min-w-[80px] text-right">—</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="100" value="${allocations[asset.id]}"
+                    id="slider-${asset.id}" data-asset="${asset.id}"
+                    class="w-full" style="accent-color:${asset.color}"
+                    oninput="handleSlider('${asset.id}', this.value)" />
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    // ─── Handle Slider Change ─────────────────────────────────────────────
+    function handleSlider(assetId, rawVal) {
+        let newVal = parseInt(rawVal);
+        let oldVal = allocations[assetId];
+        let diff = newVal - oldVal;
+
+        if (assetId !== 'cash') {
+            // Can we afford this diff from cash?
+            if (allocations['cash'] - diff < 0) {
+                // Cash would go below 0! Cap the new value to available cash
+                diff = allocations['cash'];
+                newVal = oldVal + diff;
+                document.getElementById('slider-' + assetId).value = newVal;
+            }
+            allocations[assetId] = newVal;
+            
+            // Adjust cash accordingly
+            allocations['cash'] -= diff;
+            const cashSlider = document.getElementById('slider-cash');
+            if(cashSlider) cashSlider.value = allocations['cash'];
+            const cashVal = document.getElementById('val-cash');
+            if(cashVal) cashVal.textContent = allocations['cash'] + '%';
+        } else {
+            // Making changes directly to cash slider
+            allocations[assetId] = newVal;
+        }
+
+        document.getElementById('val-' + assetId).textContent = newVal + '%';
+        recalculate();
+    }
+
+    // ─── Amount Presets ───────────────────────────────────────────────────
+    function setAmount(val) {
+        document.getElementById('totalAmount').value = val;
+        recalculate();
+    }
+
+    // ─── Recalculate Everything ───────────────────────────────────────────
+    function recalculate() {
+        const total = parseInt(document.getElementById('totalAmount').value) || 500000;
+        const horizon = parseInt(document.getElementById('horizonSlider').value) || 10;
+        document.getElementById('horizonValue').textContent = horizon;
+
+        const totalAlloc = Object.values(allocations).reduce((s, v) => s + v, 0);
+
+        // Allocation warning
+        const warning = document.getElementById('allocationWarning');
+        if (totalAlloc !== 100) {
+            warning.classList.remove('hidden');
+            warning.textContent = totalAlloc + '% / 100%';
+            warning.className = 'text-xs font-bold px-3 py-1.5 rounded-full ' +
+                (totalAlloc > 100 ? 'bg-[#ff6e84]/10 text-[#ff6e84]' : 'bg-[#f59e0b]/10 text-[#f59e0b]');
+        } else {
+            warning.classList.remove('hidden');
+            warning.textContent = '100% ✓';
+            warning.className = 'text-xs font-bold px-3 py-1.5 rounded-full bg-[#10b981]/10 text-[#10b981]';
+        }
+
+        // Update amounts
+        assets.forEach(a => {
+            const el = document.getElementById('amt-' + a.id);
+            if (el) {
+                const amt = Math.round(total * (allocations[a.id] / 100));
+                el.textContent = '₹' + amt.toLocaleString('en-IN');
+            }
+        });
+
+        // Total display
+        document.getElementById('totalDisplay').textContent = '₹' + total.toLocaleString('en-IN');
+
+        // ─── Donut Chart ──────────────────────────────────────────────
+        const circumference = 502.65; // 2 * PI * 80
+        let cumulativeOffset = 0;
+        assets.forEach(a => {
+            const pct = allocations[a.id] / Math.max(totalAlloc, 1);
+            const arcLength = pct * circumference;
+            const ring = document.getElementById('ring-' + a.id);
+            if (ring) {
+                ring.style.strokeDasharray = arcLength + ' ' + (circumference - arcLength);
+                ring.style.strokeDashoffset = -cumulativeOffset;
+                ring.style.opacity = allocations[a.id] > 0 ? '1' : '0.1';
+            }
+            cumulativeOffset += arcLength;
+        });
+
+        // Legend
+        const legend = document.getElementById('donutLegend');
+        legend.innerHTML = '';
+        assets.forEach(a => {
+            if (allocations[a.id] <= 0) return;
+            const amt = Math.round(total * (allocations[a.id] / 100));
+            legend.innerHTML += `<div class="flex justify-between items-center text-sm">
+                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:${a.color}"></span>${a.name}</span>
+                <span class="font-mono font-bold">${allocations[a.id]}%</span>
+            </div>`;
+        });
+
+        // ─── Projections ──────────────────────────────────────────────
+        let weightedReturn = 0, weightedRisk = 0, weightedDrawdown = 0;
+        const normFactor = Math.max(totalAlloc, 1);
+        assets.forEach(a => {
+            const w = allocations[a.id] / normFactor;
+            weightedReturn += w * a.expectedReturn;
+            weightedRisk += w * a.risk;
+            weightedDrawdown += w * a.maxDrawdown;
+        });
+
+        const projectedVal = total * Math.pow(1 + weightedReturn / 100, horizon);
+        const growthPct = ((projectedVal - total) / total) * 100;
+
+        document.getElementById('projectedValue').textContent = '₹' + Math.round(projectedVal).toLocaleString('en-IN');
+        document.getElementById('projectedCAGR').textContent = weightedReturn.toFixed(1) + '%';
+        document.getElementById('projectedGrowth').textContent = '+' + growthPct.toFixed(0) + '%';
+        document.getElementById('maxDrawdown').textContent = '-' + weightedDrawdown.toFixed(0) + '%';
+
+        // Risk level
+        const riskEl = document.getElementById('riskLevel');
+        if (weightedRisk < 8) {
+            riskEl.textContent = 'Low'; riskEl.style.color = '#10b981';
+        } else if (weightedRisk < 18) {
+            riskEl.textContent = 'Moderate'; riskEl.style.color = '#f59e0b';
+        } else if (weightedRisk < 30) {
+            riskEl.textContent = 'High'; riskEl.style.color = '#ff6e84';
+        } else {
+            riskEl.textContent = 'Very High'; riskEl.style.color = '#d73357';
+        }
+
+        // ─── Historical Insight ───────────────────────────────────────
+        const insight = document.getElementById('historicalInsight');
+        if (allocations.equity >= 60) {
+            insight.textContent = `With ${allocations.equity}% in equity and a ${horizon}-year horizon, historically you'd have experienced ~${weightedDrawdown.toFixed(0)}% max drawdown but recovered within 2-3 years. Over ${horizon} years, equity-heavy portfolios have delivered ${weightedReturn.toFixed(1)}% CAGR in India.`;
+        } else if (allocations.crypto >= 20) {
+            insight.textContent = `Holding ${allocations.crypto}% in crypto adds significant volatility. Bitcoin has seen 75%+ drawdowns multiple times. Consider keeping crypto below 10% and allocating the rest to stable assets for a smoother ride.`;
+        } else if (allocations.bonds >= 50) {
+            insight.textContent = `A bond-heavy portfolio (${allocations.bonds}%) provides stability but may not beat inflation over ${horizon} years. Consider adding equity exposure for long horizons — the 0% loss rate over 15-year periods in Nifty 50 means time eliminates equity risk.`;
+        } else if (allocations.gold >= 30) {
+            insight.textContent = `Gold at ${allocations.gold}% is a strong inflation hedge. Historical gold CAGR in India is ~8%. Combined with your equity allocation, this creates a naturally hedged portfolio.`;
+        } else {
+            insight.textContent = `This diversified allocation targets ${weightedReturn.toFixed(1)}% CAGR with moderate risk. Over ${horizon} years, ₹${total.toLocaleString('en-IN')} could grow to ~₹${Math.round(projectedVal).toLocaleString('en-IN')} before taxes and inflation.`;
+        }
+    }
+
+    // ─── Save Dream Portfolio ─────────────────────────────────────────────
+    function saveDreamPortfolio() {
+        const total = parseInt(document.getElementById('totalAmount').value) || 500000;
+        const horizon = parseInt(document.getElementById('horizonSlider').value) || 10;
+        localStorage.setItem('dream_portfolio', JSON.stringify({ allocations, total, horizon, savedAt: Date.now() }));
+
+        const btn = event.target.closest('button');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="material-symbols-outlined text-lg">check</span> Saved!';
+        btn.classList.add('brightness-125');
+        setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('brightness-125'); }, 2000);
+    }
+
+    // ─── Simulate This Portfolio ──────────────────────────────────────────
+    function simulateDream() {
+        const equityPct = allocations.equity || 0;
+        const goldPct = allocations.gold || 0;
+        const bondsPct = allocations.bonds + (allocations.realestate || 0);
+        const cashPct = allocations.cash + (allocations.crypto || 0);
+        const total = equityPct + goldPct + bondsPct + cashPct;
+
+        // Normalize to match sandbox allocation format
+        const dreamWeights = {
+            equity: equityPct / Math.max(total, 1),
+            gold: goldPct / Math.max(total, 1),
+            bonds: bondsPct / Math.max(total, 1),
+            cash: cashPct / Math.max(total, 1)
+        };
+
+        localStorage.setItem('fearless_portfolio', 'custom');
+        localStorage.setItem('custom_weights', JSON.stringify(dreamWeights));
+        window.location.href = 'sandbox.html';
+    }
+
+    // ─── Init ─────────────────────────────────────────────────────────────
+    // Load saved dream if exists
+    const saved = JSON.parse(localStorage.getItem('dream_portfolio') || 'null');
+    if (saved && saved.allocations) {
+        allocations = saved.allocations;
+        document.getElementById('totalAmount').value = saved.total || 500000;
+        document.getElementById('horizonSlider').value = saved.horizon || 10;
+    }
+
+    buildSliders();
+    recalculate();
+    </script>
+</body>
+</html>

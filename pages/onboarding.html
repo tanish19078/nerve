@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Celestial Ledger - Portfolio Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-dim": "#060e20",
+            "primary-dim": "#6063ee",
+            "inverse-surface": "#faf8ff",
+            "primary-fixed-dim": "#8387ff",
+            "on-primary": "#0f00a4",
+            "surface-container-low": "#091328",
+            "tertiary-container": "#ff8ed2",
+            "on-secondary-container": "#d9c8ff",
+            "on-surface": "#dee5ff",
+            "surface": "#060e20",
+            "error-container": "#a70138",
+            "surface-tint": "#a3a6ff",
+            "on-primary-fixed-variant": "#0e009d",
+            "on-tertiary-fixed": "#3b002b",
+            "on-error-container": "#ffb2b9",
+            "secondary-fixed-dim": "#ceb9ff",
+            "primary-fixed": "#9396ff",
+            "tertiary-fixed": "#ff8ed2",
+            "surface-container-high": "#141f38",
+            "on-primary-fixed": "#000000",
+            "on-background": "#dee5ff",
+            "secondary-fixed": "#dac9ff",
+            "on-error": "#490013",
+            "surface-bright": "#1f2b49",
+            "outline-variant": "#40485d",
+            "tertiary": "#ffa5d9",
+            "primary-container": "#9396ff",
+            "primary": "#a3a6ff",
+            "surface-container-lowest": "#000000",
+            "secondary-dim": "#8455ef",
+            "tertiary-dim": "#ef81c4",
+            "surface-container-highest": "#192540",
+            "on-tertiary-container": "#63054a",
+            "surface-container": "#0f1930",
+            "on-tertiary-fixed-variant": "#6e1354",
+            "on-secondary-fixed-variant": "#5f28c8",
+            "inverse-primary": "#494bd7",
+            "error": "#ff6e84",
+            "secondary-container": "#5516be",
+            "inverse-on-surface": "#4d556b",
+            "on-primary-container": "#0a0081",
+            "secondary": "#ac8aff",
+            "on-secondary-fixed": "#40009b",
+            "tertiary-fixed-dim": "#ef81c4",
+            "on-surface-variant": "#a3aac4",
+            "error-dim": "#d73357",
+            "on-tertiary": "#701455",
+            "background": "#060e20",
+            "surface-variant": "#192540",
+            "outline": "#6d758c",
+            "on-secondary": "#280067"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #060e20;
+      color: #dee5ff;
+      font-family: 'Inter', sans-serif;
+    }
+    .glass-card {
+      background: rgba(25, 37, 64, 0.4);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+    .particle {
+      position: fixed;
+      border-radius: 50%;
+      background: #9396ff;
+      filter: blur(40px);
+      opacity: 0.1;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Background Particles -->
+<div class="particle w-64 h-64 top-[-10%] left-[-10%]"></div>
+<div class="particle w-96 h-96 bottom-[-20%] right-[-10%] opacity-20"></div>
+<!-- TopAppBar -->
+<header class="bg-[#091328] border-none fixed top-0 w-full z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#a3a6ff]" data-icon="close">close</span>
+<h1 class="font-['Inter'] tracking-tight leading-[1.6] font-bold text-[#a3a6ff]">Step 2 of 2</h1>
+</div>
+<div class="text-lg font-black text-[#dee5ff] tracking-tighter">Nerve</div>
+<button class="text-[#a3aac4] font-['Inter'] tracking-tight leading-[1.6] font-bold hover:bg-[#1f2b49] transition-colors px-3 py-1 rounded-lg">Skip</button>
+</div>
+</header>
+<main class="flex-1 mt-20 mb-32 px-6 max-w-7xl mx-auto w-full">
+<!-- Hero Section: Intentional Asymmetry -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-12 items-end">
+<div class="md:col-span-7">
+<div class="flex items-center gap-2 mb-4">
+<div class="h-2 w-8 bg-primary rounded-full"></div>
+<div class="h-2 w-8 bg-primary rounded-full"></div>
+</div>
+<h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-6 leading-tight">
+          Choose Your Starting <br/><span class="text-primary">Portfolio</span>
+</h2>
+<p class="text-lg text-on-surface-variant max-w-xl leading-[1.6]">
+          Based on your risk tolerance quiz results, we recommend the <span class="text-secondary font-bold">Balanced</span> portfolio. But you can choose any option below.
+        </p>
+</div>
+<div class="md:col-span-5 flex flex-col md:items-end">
+<div class="glass-card border border-outline-variant/15 p-6 rounded-xl flex items-start gap-4 max-w-sm">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="info">info</span>
+<p class="text-sm text-on-surface-variant">
+            Don't worry — you can change your portfolio anytime during simulations. There's zero real risk!
+          </p>
+</div>
+</div>
+</div>
+<!-- Portfolio Cards Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Card 1: Conservative -->
+<div data-portfolio="conservative" class="portfolio-card cursor-pointer glass-card p-8 rounded-xl border border-outline-variant/15 flex flex-col hover:border-[#10B981]/50 transition-all group">
+<div class="flex justify-between items-start mb-8">
+<div>
+<span class="text-[#10B981] font-bold text-xs tracking-widest uppercase mb-1 block">Level 1</span>
+<h3 class="text-2xl font-bold text-on-surface">Conservative</h3>
+</div>
+<div class="relative flex items-center justify-center w-16 h-16">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle cx="32" cy="32" fill="transparent" r="28" stroke="#10B981" stroke-dasharray="175.9" stroke-dashoffset="131.9" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-sm font-bold text-on-surface">25</span>
+</div>
+</div>
+<div class="flex justify-center mb-8 relative">
+<!-- Placeholder for Donut Chart -->
+<div class="w-40 h-40 rounded-full border-[12px] border-[#10B981]/20 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 border-[12px] border-t-[#10B981] border-r-[#10B981]/60 border-b-[#10B981]/40 border-l-transparent rounded-full rotate-45"></div>
+<div class="text-center">
+<span class="block text-xs text-on-surface-variant">Est. Return</span>
+<span class="text-lg font-bold text-[#10B981]">7-9%</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 mb-8 flex-1">
+<p class="text-on-surface-variant italic mb-4">"Like a fortress with a small garden. 65% in safe assets."</p>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">FDs</span>
+<span class="font-bold">40%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Bonds</span>
+<span class="font-bold">25%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Gold &amp; Liquid</span>
+<span class="font-bold">20%</span>
+</div>
+</div>
+<button class="w-full py-4 rounded-full border-2 border-[#10B981] text-[#10B981] font-bold hover:bg-[#10B981]/10 transition-all">Select</button>
+</div>
+<!-- Card 2: Balanced (Recommended) -->
+<div class="relative group lg:-mt-4 lg:mb-4">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-1 rounded-full text-xs font-bold z-10 shadow-lg shadow-primary/20">
+          RECOMMENDED
+        </div>
+<div data-portfolio="balanced" class="portfolio-card cursor-pointer bg-surface-container-high p-8 rounded-xl border-2 border-primary/50 flex flex-col h-full shadow-[0_20px_40px_rgba(15,0,164,0.15)] transform scale-[1.02] ring-4 ring-primary/20">
+<div class="flex justify-between items-start mb-8">
+<div>
+<span class="text-primary font-bold text-xs tracking-widest uppercase mb-1 block">Level 2</span>
+<h3 class="text-2xl font-bold text-on-surface">Balanced</h3>
+</div>
+<div class="relative flex items-center justify-center w-16 h-16">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle cx="32" cy="32" fill="transparent" r="28" stroke="#a3a6ff" stroke-dasharray="175.9" stroke-dashoffset="87.9" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-sm font-bold text-on-surface">50</span>
+</div>
+</div>
+<div class="flex justify-center mb-8">
+<div class="w-40 h-40 rounded-full border-[12px] border-primary/20 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 border-[12px] border-t-primary border-r-secondary-dim border-b-primary/40 border-l-transparent rounded-full rotate-12"></div>
+<div class="text-center">
+<span class="block text-xs text-on-surface-variant">Est. Return</span>
+<span class="text-lg font-bold text-primary">10-14%</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 mb-8 flex-1">
+<p class="text-on-surface-variant italic mb-4">"A well-balanced meal of growth and stability."</p>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Nifty 50</span>
+<span class="font-bold">35%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Mid Cap</span>
+<span class="font-bold">15%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Gold &amp; Bonds</span>
+<span class="font-bold">35%</span>
+</div>
+</div>
+<button class="w-full py-4 rounded-full bg-gradient-to-br from-primary to-secondary text-white font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/30">Select Balanced</button>
+</div>
+</div>
+<!-- Card 3: Growth -->
+<div data-portfolio="aggressive" class="portfolio-card cursor-pointer glass-card p-8 rounded-xl border border-outline-variant/15 flex flex-col hover:border-[#EF4444]/50 transition-all group">
+<div class="flex justify-between items-start mb-8">
+<div>
+<span class="text-[#EF4444] font-bold text-xs tracking-widest uppercase mb-1 block">Level 3</span>
+<h3 class="text-2xl font-bold text-on-surface">Growth</h3>
+</div>
+<div class="relative flex items-center justify-center w-16 h-16">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle cx="32" cy="32" fill="transparent" r="28" stroke="#EF4444" stroke-dasharray="175.9" stroke-dashoffset="38.7" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-sm font-bold text-on-surface">78</span>
+</div>
+</div>
+<div class="flex justify-center mb-8 relative">
+<div class="w-40 h-40 rounded-full border-[12px] border-[#EF4444]/20 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 border-[12px] border-t-[#EF4444] border-r-[#EF4444]/80 border-b-[#EF4444]/60 border-l-transparent rounded-full -rotate-45"></div>
+<div class="text-center">
+<span class="block text-xs text-on-surface-variant">Est. Return</span>
+<span class="text-lg font-bold text-[#EF4444]">13-18%</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 mb-8 flex-1">
+<p class="text-on-surface-variant italic mb-4">"Like a rocket ship. 85% in growth assets."</p>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Small Cap</span>
+<span class="font-bold">15%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Mid Cap</span>
+<span class="font-bold">25%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">International</span>
+<span class="font-bold">15%</span>
+</div>
+</div>
+<button class="w-full py-4 rounded-full border-2 border-[#EF4444] text-[#EF4444] font-bold hover:bg-[#EF4444]/10 transition-all">Select</button>
+</div>
+</div>
+<!-- Info Info -->
+<div class="mt-16 text-center space-y-4">
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-highest rounded-full border border-outline-variant/15">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-on-surface font-semibold tracking-tight">Start with ₹1,00,000 virtual money</span>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Shell -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex flex-col justify-center items-center px-8 pb-8 pt-4 bg-[#060e20]/40 backdrop-blur-xl">
+<div class="flex flex-col items-center gap-4 w-full max-w-lg">
+<button id="continue-btn" class="w-full flex items-center justify-center gap-3 bg-gradient-to-br from-[#a3a6ff] to-[#8455ef] text-white rounded-full p-5 font-['Inter'] text-base font-bold shadow-[0_-20px_40px_rgba(15,0,164,0.08)] hover:opacity-90 active:scale-95 duration-200 transition-all cursor-pointer">
+        Continue
+        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<a class="text-on-surface-variant hover:text-on-surface font-bold text-sm transition-colors" href="quiz.html">Go Back</a>
+</div>
+</footer>
+<!-- Floating Particles for Visual Interest -->
+<div class="particle w-4 h-4 top-1/4 left-[5%] opacity-30"></div>
+<div class="particle w-2 h-2 top-1/2 right-[15%] opacity-20"></div>
+<div class="particle w-3 h-3 bottom-1/4 left-[40%] opacity-40"></div>
+<script src="/public/js/onboarding.js"></script>
+</body></html>

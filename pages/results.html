@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Simulation Results | Nerve</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "surface-dim": "#060e20",
+                    "surface-bright": "#1f2b49",
+                    "surface-container": "#0f1930",
+                    "on-surface": "#dee5ff",
+                    "surface-container-high": "#141f38",
+                    "primary-container": "#9396ff",
+                    "primary": "#a3a6ff",
+                    "on-surface-variant": "#a3aac4",
+                    "error": "#ff6e84",
+                    "surface-variant": "#192540",
+                    "background": "#060e20",
+                    "primary-dim": "#6063ee",
+                    "on-primary-container": "#0a0081",
+                    "on-error-container": "#ffb2b9",
+                    "outline": "#6d758c",
+                    "outline-variant": "#40485d",
+                    "secondary": "#ac8aff",
+                    "secondary-dim": "#8455ef",
+                    "on-primary": "#0f00a4",
+                    "on-error": "#490013",
+                    "surface-container-low": "#091328",
+                    "surface-container-highest": "#192540",
+                    "surface": "#060e20",
+                    "error-container": "#a70138",
+                    "error-dim": "#d73357",
+                    "surface-container-lowest": "#000000",
+                    "tertiary": "#ffa5d9",
+                    "on-tertiary": "#701455",
+                    "tertiary-dim": "#ef81c4",
+                    "inverse-primary": "#494bd7",
+                    "inverse-surface": "#faf8ff",
+                    "primary-fixed-dim": "#8387ff",
+                    "secondary-container": "#5516be",
+                    "on-secondary-container": "#d9c8ff",
+                    "on-secondary": "#280067"
+                },
+                "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "mono": ["JetBrains Mono"]
+                }
+            },
+        },
+    }
+</script>
+<style>
+    body { font-family: 'Inter', sans-serif; background-color: #060e20; color: #dee5ff; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .glass-card { background: rgba(25, 37, 64, 0.4); backdrop-filter: blur(24px); }
+    .glow-primary { box-shadow: 0 0 20px rgba(163, 166, 255, 0.2); }
+
+    @keyframes countUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .stat-animate {
+        animation: countUp 0.6s ease-out forwards;
+    }
+    .stat-animate:nth-child(2) { animation-delay: 0.1s; }
+    .stat-animate:nth-child(3) { animation-delay: 0.2s; }
+    .stat-animate:nth-child(4) { animation-delay: 0.3s; }
+
+    @keyframes barGrow {
+        from { height: 0%; }
+    }
+    .bar-animate {
+        animation: barGrow 0.8s ease-out forwards;
+    }
+</style>
+</head>
+<body class="bg-background min-h-screen">
+
+<!-- TopNavBar -->
+<nav class="w-full sticky top-0 z-50 bg-slate-950/40 backdrop-blur-xl shadow-[0_20px_60px_-15px_rgba(15,0,164,0.08)]">
+<div class="flex justify-between items-center h-16 px-8 w-full max-w-[1920px] mx-auto">
+    <a href="/" class="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-dim">Nerve</a>
+    <div class="hidden md:flex items-center gap-8 font-body font-semibold tracking-tight">
+        <a class="text-slate-400 hover:text-slate-200 transition-colors" href="dashboard.html">Dashboard</a>
+        <a class="text-primary border-b-2 border-primary pb-1" href="sandbox.html">Simulations</a>
+        <a class="text-slate-400 hover:text-slate-200 transition-colors" href="ai-chat.html">AI Explainer</a>
+        <a class="text-slate-400 hover:text-slate-200 transition-colors" href="probability.html">Probability</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-slate-400 hover:bg-slate-800/50 transition-all p-2 rounded-full cursor-pointer">notifications</span>
+        <span class="material-symbols-outlined text-slate-400 hover:bg-slate-800/50 transition-all p-2 rounded-full cursor-pointer">settings</span>
+    </div>
+</div>
+</nav>
+
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-slate-950 flex flex-col py-6 space-y-2 font-body text-sm font-medium leading-relaxed hidden lg:flex">
+    <div class="px-6 mb-6">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary">psychology</span>
+            </div>
+            <div>
+                <div class="text-primary font-bold">The Ledger</div>
+                <div class="text-[10px] uppercase tracking-widest text-slate-500" id="side-portfolio-type">—</div>
+            </div>
+        </div>
+    </div>
+    <a class="flex items-center gap-3 text-slate-400 px-6 py-4 hover:bg-slate-900/80 hover:text-slate-200 transition-all" href="dashboard.html">
+        <span class="material-symbols-outlined">grid_view</span> Dashboard
+    </a>
+    <a class="flex items-center gap-3 bg-primary/10 text-primary border-r-4 border-primary px-6 py-4 transition-all" href="sandbox.html">
+        <span class="material-symbols-outlined">analytics</span> Simulations
+    </a>
+    <a class="flex items-center gap-3 text-slate-400 px-6 py-4 hover:bg-slate-900/80 hover:text-slate-200 transition-all" href="ai-chat.html">
+        <span class="material-symbols-outlined">smart_toy</span> AI Explainer
+    </a>
+    <a class="flex items-center gap-3 text-slate-400 px-6 py-4 hover:bg-slate-900/80 hover:text-slate-200 transition-all" href="probability.html">
+        <span class="material-symbols-outlined">speed</span> Probability
+    </a>
+    <div class="mt-auto px-6 pb-8">
+        <a href="sandbox.html" class="block w-full bg-gradient-to-br from-primary to-secondary-dim text-on-primary font-bold py-3 rounded-xl text-center active:scale-95 duration-200">
+            New Simulation
+        </a>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<main class="flex-1 lg:ml-64 p-8 max-w-7xl mx-auto overflow-hidden">
+
+    <!-- Header Section -->
+    <header class="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+        <div>
+            <div class="flex items-center gap-3 mb-2">
+                <span id="result-badge" class="px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase">—</span>
+                <h2 id="result-scenario-name" class="text-on-surface-variant font-medium">—</h2>
+            </div>
+            <h1 class="text-5xl font-black tracking-tight text-on-surface leading-none">Simulation Complete!</h1>
+        </div>
+        <div class="flex items-center gap-4 bg-surface-container-highest px-6 py-4 rounded-xl border border-outline-variant/10 shadow-2xl">
+            <div id="badge-icon" class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
+                <span class="material-symbols-outlined text-surface-container-lowest" style="font-variation-settings: 'FILL' 1;">shield</span>
+            </div>
+            <div>
+                <div class="text-xs uppercase tracking-tighter text-on-surface-variant">Achievement Unlocked</div>
+                <div id="badge-title" class="text-lg font-bold text-tertiary">—</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Results Summary Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="stat-animate bg-surface-container p-6 rounded-xl border border-outline-variant/5 opacity-0">
+            <p class="text-sm text-on-surface-variant mb-1">Starting Value</p>
+            <p id="stat-start" class="text-3xl font-bold text-on-surface">—</p>
+        </div>
+        <div class="stat-animate bg-surface-container-high p-6 rounded-xl border border-outline-variant/10 opacity-0">
+            <p class="text-sm text-on-surface-variant mb-1">Final Value</p>
+            <p id="stat-final" class="text-3xl font-bold">—</p>
+        </div>
+        <div class="stat-animate bg-surface-container-high p-6 rounded-xl border border-outline-variant/10 opacity-0">
+            <p class="text-sm text-on-surface-variant mb-1">Total Return</p>
+            <div class="flex items-baseline gap-2">
+                <p id="stat-return" class="text-3xl font-bold">—</p>
+                <span id="stat-return-icon" class="material-symbols-outlined text-lg"></span>
+            </div>
+        </div>
+        <div class="stat-animate bg-surface-container-highest p-6 rounded-xl border border-primary/20 glow-primary opacity-0">
+            <p class="text-sm text-on-surface-variant mb-1">Max Drawdown</p>
+            <p id="stat-drawdown" class="text-3xl font-bold text-error">—</p>
+            <p id="drawdown-note" class="text-xs font-semibold text-emerald-400 mt-1 italic"></p>
+        </div>
+    </section>
+
+    <!-- Trade Actions Summary -->
+    <section class="mb-12 bg-surface-container-low rounded-2xl p-8 border border-outline-variant/5">
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">receipt_long</span>
+            Your Trade Actions
+        </h3>
+        <div id="trade-summary" class="grid grid-cols-3 gap-6 mb-6">
+            <div class="text-center p-4 rounded-xl bg-[#10b981]/5 border border-[#10b981]/10">
+                <p class="text-3xl font-black text-[#10b981]" id="buy-count">0</p>
+                <p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mt-1">Buys</p>
+            </div>
+            <div class="text-center p-4 rounded-xl bg-error/5 border border-error/10">
+                <p class="text-3xl font-black text-error" id="sell-count">0</p>
+                <p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mt-1">Sells</p>
+            </div>
+            <div class="text-center p-4 rounded-xl bg-primary/5 border border-primary/10">
+                <p class="text-3xl font-black text-primary" id="hold-count">0</p>
+                <p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mt-1">Holds</p>
+            </div>
+        </div>
+        <div id="trade-log-list" class="space-y-2 max-h-48 overflow-y-auto scrollbar-hide">
+            <!-- Dynamically populated -->
+        </div>
+    </section>
+
+    <!-- Bottom Layout: Bento Style -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        <!-- Emotional Journey -->
+        <div class="lg:col-span-2 glass-card p-8 rounded-2xl border border-outline-variant/10">
+            <div class="flex justify-between items-start mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-1">Emotional Journey</h3>
+                    <p class="text-sm text-on-surface-variant">Your fear <span id="fear-change" class="font-bold">—</span></p>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs uppercase tracking-widest text-slate-500 font-bold">Anxiety Tracking</span>
+                </div>
+            </div>
+            <div class="flex gap-12 items-end h-48 mb-8">
+                <div class="flex-1 flex flex-col items-center gap-4">
+                    <div id="bar-before" class="bar-animate w-full rounded-t-xl relative border-x border-t" style="height: 0%;">
+                        <div id="emoji-before" class="absolute top-[-30px] left-1/2 -translate-x-1/2 text-2xl">😐</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-current to-transparent opacity-40"></div>
+                    </div>
+                    <span id="label-before" class="text-sm font-bold">Before (—/10)</span>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-4">
+                    <div id="bar-after" class="bar-animate w-full rounded-t-xl relative border-x border-t" style="height: 0%;">
+                        <div id="emoji-after" class="absolute top-[-30px] left-1/2 -translate-x-1/2 text-2xl">😐</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-current to-transparent opacity-40"></div>
+                    </div>
+                    <span id="label-after" class="text-sm font-bold">After (—/10)</span>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-outline-variant/10">
+                <label class="block text-sm font-medium text-on-surface mb-6">How anxious do you feel now about real investing?</label>
+                <div class="flex items-center gap-4">
+                    <span class="text-2xl">😌</span>
+                    <input id="post-anxiety-slider" class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="10" min="1" step="1" type="range" value="5"/>
+                    <span class="text-2xl">😰</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Insights & Actions Column -->
+        <div class="space-y-8">
+            <!-- AI Insights Card -->
+            <div class="bg-surface-container-high p-8 rounded-2xl border border-primary/20 relative overflow-hidden group">
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[80px] rounded-full group-hover:bg-primary/20 transition-all"></div>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined text-primary">auto_awesome</span>
+                    <h3 class="text-lg font-bold">What happened and why?</h3>
+                </div>
+                <p id="ai-insight" class="text-sm text-on-surface-variant leading-relaxed mb-6">
+                    Analyzing your simulation results…
+                </p>
+                <div class="bg-surface-container-lowest/50 p-4 rounded-xl border border-outline-variant/10">
+                    <div class="text-xs text-on-surface-variant uppercase mb-1">Portfolio Type</div>
+                    <div id="result-portfolio-type" class="text-sm font-semibold capitalize">—</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-4">
+                <a href="sandbox.html" class="block w-full bg-gradient-to-br from-primary to-secondary-dim text-on-primary font-black py-4 rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-center">
+                    Try Another Scenario
+                </a>
+                <a href="ai-chat.html" class="block w-full bg-transparent border border-outline-variant hover:border-primary/50 text-on-surface font-bold py-4 rounded-xl transition-all text-center">
+                    <span class="material-symbols-outlined text-sm align-middle mr-1">smart_toy</span>
+                    Talk to AI About This
+                </a>
+                <a class="block text-center text-primary text-sm font-bold hover:underline transition-all" href="dashboard.html">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+
+<!-- Background Decoration -->
+<div class="fixed bottom-10 right-10 w-32 h-32 bg-primary/10 blur-[50px] rounded-full pointer-events-none"></div>
+<div class="fixed top-40 right-1/4 w-24 h-24 bg-tertiary-dim/10 blur-[40px] rounded-full pointer-events-none"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ── Read all simulation data from localStorage ──
+    const scenario     = localStorage.getItem('sim_scenario') || 'Unknown Scenario';
+    const difficulty   = localStorage.getItem('sim_difficulty') || 'medium';
+    const startingVal  = parseInt(localStorage.getItem('sim_starting_value')) || 100000;
+    const finalVal     = parseInt(localStorage.getItem('sim_final_value')) || startingVal;
+    const maxDrawdown  = parseFloat(localStorage.getItem('sim_max_drawdown')) || 0;
+    const totalReturn  = parseFloat(localStorage.getItem('sim_total_return_pct')) || 0;
+    const trades       = JSON.parse(localStorage.getItem('sim_trades') || '[]');
+    const anxietyStart = parseInt(localStorage.getItem('sim_anxiety_start')) || 5;
+    const anxietyEnd   = parseInt(localStorage.getItem('sim_anxiety_end')) || 5;
+    const portfolioType = localStorage.getItem('sim_portfolio_type') || 'balanced';
+    const duration     = parseInt(localStorage.getItem('sim_duration')) || 0;
+
+    // ── Scenario Header ──
+    document.getElementById('result-scenario-name').textContent = `Scenario: ${scenario}`;
+
+    const diffStyles = {
+        easy:   { bg: 'bg-[#10b981]/20', text: 'text-[#10b981]', border: 'border-[#10b981]/30' },
+        medium: { bg: 'bg-[#f59e0b]/20', text: 'text-[#f59e0b]', border: 'border-[#f59e0b]/30' },
+        hard:   { bg: 'bg-error/20',     text: 'text-error',     border: 'border-error/30' },
+        epic:   { bg: 'bg-primary/20',   text: 'text-primary',   border: 'border-primary/30' }
+    };
+    const ds = diffStyles[difficulty] || diffStyles.medium;
+    const badge = document.getElementById('result-badge');
+    badge.className = `px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase ${ds.bg} ${ds.text} border ${ds.border}`;
+    badge.textContent = difficulty.toUpperCase();
+
+    // ── Stats ──
+    document.getElementById('stat-start').textContent = `₹${startingVal.toLocaleString('en-IN')}`;
+
+    const finalColor = totalReturn >= 0 ? 'text-[#10b981]' : 'text-[#f59e0b]';
+    document.getElementById('stat-final').textContent = `₹${finalVal.toLocaleString('en-IN')}`;
+    document.getElementById('stat-final').className = `text-3xl font-bold ${finalColor}`;
+
+    const returnEl = document.getElementById('stat-return');
+    const returnIcon = document.getElementById('stat-return-icon');
+    returnEl.textContent = `${totalReturn >= 0 ? '+' : ''}${totalReturn}%`;
+    if (totalReturn >= 0) {
+        returnEl.className = 'text-3xl font-bold text-[#10b981]';
+        returnIcon.textContent = 'trending_up';
+        returnIcon.className = 'material-symbols-outlined text-lg text-[#10b981]';
+    } else {
+        returnEl.className = 'text-3xl font-bold text-error';
+        returnIcon.textContent = 'trending_down';
+        returnIcon.className = 'material-symbols-outlined text-lg text-error';
+    }
+
+    document.getElementById('stat-drawdown').textContent = `${maxDrawdown}%`;
+    const drawdownNote = document.getElementById('drawdown-note');
+    if (maxDrawdown > -10) drawdownNote.textContent = 'Minimal drawdown — great risk management!';
+    else if (maxDrawdown > -25) drawdownNote.textContent = '…but you held strong!';
+    else drawdownNote.textContent = '…but you survived the storm!';
+
+    // ── Achievement Badge ──
+    const badgeTitle = document.getElementById('badge-title');
+    const badgeIcon = document.getElementById('badge-icon');
+    if (maxDrawdown < -25 && totalReturn > -10) {
+        badgeTitle.textContent = 'Crash Survivor! 🛡️';
+    } else if (totalReturn > 20) {
+        badgeTitle.textContent = 'Bull Rider! 🚀';
+        badgeIcon.className = 'w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20';
+    } else if (trades.filter(t => t.action === 'HOLD').length >= 3) {
+        badgeTitle.textContent = 'Diamond Hands 💎';
+        badgeIcon.className = 'w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/20';
+    } else if (totalReturn > 0) {
+        badgeTitle.textContent = 'Steady Earner 📈';
+    } else {
+        badgeTitle.textContent = 'Lesson Learned 📚';
+    }
+
+    // ── Trade Summary ──
+    const buys = trades.filter(t => t.action === 'BUY').length;
+    const sells = trades.filter(t => t.action === 'SELL').length;
+    const holds = trades.filter(t => t.action === 'HOLD').length;
+    document.getElementById('buy-count').textContent = buys;
+    document.getElementById('sell-count').textContent = sells;
+    document.getElementById('hold-count').textContent = holds;
+
+    const tradeLogList = document.getElementById('trade-log-list');
+    if (trades.length === 0) {
+        tradeLogList.innerHTML = '<p class="text-sm text-on-surface-variant italic">No trades recorded during this simulation.</p>';
+    } else {
+        trades.forEach(t => {
+            const actionColors = { BUY: 'text-[#10b981] bg-[#10b981]/10', SELL: 'text-error bg-error/10', HOLD: 'text-primary bg-primary/10' };
+            const actionIcons  = { BUY: 'add_shopping_cart', SELL: 'trending_down', HOLD: 'pause' };
+            const row = document.createElement('div');
+            row.className = 'flex items-center gap-3 p-3 rounded-xl bg-surface-container border border-outline-variant/5';
+            row.innerHTML = `
+                <div class="w-8 h-8 rounded-lg ${actionColors[t.action] || 'bg-surface-variant'} flex items-center justify-center">
+                    <span class="material-symbols-outlined text-sm">${actionIcons[t.action] || 'info'}</span>
+                </div>
+                <div class="flex-1">
+                    <span class="text-sm font-bold">${t.action}</span>
+                    <span class="text-xs text-on-surface-variant ml-2">${t.label || ''}</span>
+                </div>
+                <span class="text-sm font-mono font-bold">${t.amount ? '₹' + Math.round(t.amount).toLocaleString('en-IN') : '—'}</span>
+            `;
+            tradeLogList.appendChild(row);
+        });
+    }
+
+    // ── Emotional Journey ──
+    const fearChangeEl = document.getElementById('fear-change');
+    const fearDiff = anxietyStart - anxietyEnd;
+    if (fearDiff > 0) {
+        fearChangeEl.textContent = `reduced by ${((fearDiff / anxietyStart) * 100).toFixed(0)}%! 🎉`;
+        fearChangeEl.className = 'font-bold text-emerald-400';
+    } else if (fearDiff < 0) {
+        fearChangeEl.textContent = `increased by ${((Math.abs(fearDiff) / anxietyStart) * 100).toFixed(0)}%`;
+        fearChangeEl.className = 'font-bold text-error';
+    } else {
+        fearChangeEl.textContent = 'stayed the same';
+        fearChangeEl.className = 'font-bold text-on-surface-variant';
+    }
+
+    // Before bar
+    const barBefore = document.getElementById('bar-before');
+    const barHeight = (anxietyStart / 10) * 100;
+    barBefore.style.height = barHeight + '%';
+    if (anxietyStart >= 7) {
+        barBefore.className += ' bg-error/20 border-error/30';
+        document.getElementById('emoji-before').textContent = '😫';
+        document.getElementById('label-before').textContent = `Before (${anxietyStart}/10)`;
+        document.getElementById('label-before').className = 'text-sm font-bold text-error';
+    } else if (anxietyStart >= 4) {
+        barBefore.className += ' bg-[#f59e0b]/20 border-[#f59e0b]/30';
+        document.getElementById('emoji-before').textContent = '😟';
+        document.getElementById('label-before').textContent = `Before (${anxietyStart}/10)`;
+        document.getElementById('label-before').className = 'text-sm font-bold text-[#f59e0b]';
+    } else {
+        barBefore.className += ' bg-emerald-500/20 border-emerald-500/30';
+        document.getElementById('emoji-before').textContent = '😊';
+        document.getElementById('label-before').textContent = `Before (${anxietyStart}/10)`;
+        document.getElementById('label-before').className = 'text-sm font-bold text-emerald-400';
+    }
+
+    // After bar
+    const barAfter = document.getElementById('bar-after');
+    const afterHeight = (anxietyEnd / 10) * 100;
+    setTimeout(() => {
+        barAfter.style.height = afterHeight + '%';
+    }, 400);
+    if (anxietyEnd >= 7) {
+        barAfter.className += ' bg-error/20 border-error/30';
+        document.getElementById('emoji-after').textContent = '😰';
+        document.getElementById('label-after').textContent = `After (${anxietyEnd}/10)`;
+        document.getElementById('label-after').className = 'text-sm font-bold text-error';
+    } else if (anxietyEnd >= 4) {
+        barAfter.className += ' bg-[#f59e0b]/20 border-[#f59e0b]/30';
+        document.getElementById('emoji-after').textContent = '😐';
+        document.getElementById('label-after').textContent = `After (${anxietyEnd}/10)`;
+        document.getElementById('label-after').className = 'text-sm font-bold text-[#f59e0b]';
+    } else {
+        barAfter.className += ' bg-emerald-500/20 border-emerald-500/30';
+        document.getElementById('emoji-after').textContent = '😌';
+        document.getElementById('label-after').textContent = `After (${anxietyEnd}/10)`;
+        document.getElementById('label-after').className = 'text-sm font-bold text-emerald-400';
+    }
+
+    // ── AI Insight ──
+    const insightEl = document.getElementById('ai-insight');
+    if (totalReturn > 10) {
+        insightEl.textContent = `Strong performance! Your ${portfolioType} portfolio navigated ${scenario} well. Staying invested during volatility is the key to long-term wealth building. Over 92% of 5-year periods in market history have delivered positive returns.`;
+    } else if (totalReturn > 0) {
+        insightEl.textContent = `Positive return through a challenging period — that's the power of diversification. Your ${portfolioType} allocation cushioned the blow and allowed gradual recovery. Time in the market beats timing the market.`;
+    } else if (totalReturn > -10) {
+        insightEl.textContent = `A small loss in a volatile scenario is actually a win. Your ${portfolioType} portfolio absorbed much of the shock. Historical data shows that investors who stay invested through dips recover within 6-12 months on average.`;
+    } else {
+        insightEl.textContent = `This was a tough scenario. But remember: even the worst crashes in history (2008, 2020) recovered fully within 2-3 years. The lesson? Don't panic sell. Time is your greatest ally as an investor.`;
+    }
+
+    // Portfolio type display
+    document.getElementById('result-portfolio-type').textContent = portfolioType.charAt(0).toUpperCase() + portfolioType.slice(1) + ' Portfolio';
+    const sideType = document.getElementById('side-portfolio-type');
+    if (sideType) sideType.textContent = portfolioType + ' Tier';
+});
+</script>
+</body>
+</html>

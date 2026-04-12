@@ -1,0 +1,109 @@
+{
+  "bull-run": {
+    "id": "bull-run",
+    "name": "Bull Market Rally (2020-2021)",
+    "description": "Experience the post-COVID recovery rally where markets surged to all-time highs. A great scenario to understand how patience pays off after a crash.",
+    "difficulty": "easy",
+    "duration": "18 months",
+    "icon": "trending_up",
+    "color": "#10B981",
+    "dataPoints": [
+      { "month": 0, "label": "Apr 2020", "niftyValue": 9860, "change": 0.0 },
+      { "month": 1, "label": "May 2020", "niftyValue": 9580, "change": -2.8 },
+      { "month": 2, "label": "Jun 2020", "niftyValue": 10302, "change": 7.5 },
+      { "month": 3, "label": "Jul 2020", "niftyValue": 11073, "change": 7.5 },
+      { "month": 4, "label": "Aug 2020", "niftyValue": 11388, "change": 2.8 },
+      { "month": 5, "label": "Sep 2020", "niftyValue": 11247, "change": -1.2 },
+      { "month": 6, "label": "Oct 2020", "niftyValue": 11642, "change": 3.5 },
+      { "month": 7, "label": "Nov 2020", "niftyValue": 12968, "change": 11.4 },
+      { "month": 8, "label": "Dec 2020", "niftyValue": 13982, "change": 7.8 },
+      { "month": 9, "label": "Jan 2021", "niftyValue": 13635, "change": -2.5 },
+      { "month": 10, "label": "Feb 2021", "niftyValue": 14529, "change": 6.6 },
+      { "month": 11, "label": "Mar 2021", "niftyValue": 14691, "change": 1.1 },
+      { "month": 12, "label": "Apr 2021", "niftyValue": 14631, "change": -0.4 },
+      { "month": 13, "label": "May 2021", "niftyValue": 15583, "change": 6.5 },
+      { "month": 14, "label": "Jun 2021", "niftyValue": 15722, "change": 0.9 },
+      { "month": 15, "label": "Jul 2021", "niftyValue": 15763, "change": 0.3 },
+      { "month": 16, "label": "Aug 2021", "niftyValue": 17132, "change": 8.7 },
+      { "month": 17, "label": "Sep 2021", "niftyValue": 17618, "change": 2.8 }
+    ],
+    "summary": {
+      "totalReturn": 78.7,
+      "maxDrawdown": -2.8,
+      "bestMonth": 11.4,
+      "worstMonth": -2.8,
+      "volatility": "Low-Medium"
+    }
+  },
+  "market-crash": {
+    "id": "market-crash",
+    "name": "COVID Market Crash (2020)",
+    "description": "Relive the fastest market crash in history. See how panic selling during COVID led to massive losses — and how markets recovered within months.",
+    "difficulty": "hard",
+    "duration": "6 months",
+    "icon": "trending_down",
+    "color": "#EF4444",
+    "dataPoints": [
+      { "month": 0, "label": "Jan 2020", "niftyValue": 12183, "change": 0.0 },
+      { "month": 0.5, "label": "Early Feb 2020", "niftyValue": 12080, "change": -0.8 },
+      { "month": 1, "label": "Feb 2020", "niftyValue": 11201, "change": -8.1 },
+      { "month": 1.5, "label": "Early Mar 2020", "niftyValue": 10451, "change": -6.7 },
+      { "month": 2, "label": "Mar 2020 (Crash)", "niftyValue": 8598, "change": -17.7 },
+      { "month": 2.25, "label": "Late Mar 2020", "niftyValue": 8281, "change": -3.7 },
+      { "month": 3, "label": "Apr 2020", "niftyValue": 9860, "change": 19.1 },
+      { "month": 4, "label": "May 2020", "niftyValue": 9580, "change": -2.8 },
+      { "month": 5, "label": "Jun 2020", "niftyValue": 10302, "change": 7.5 }
+    ],
+    "summary": {
+      "totalReturn": -15.4,
+      "maxDrawdown": -32.0,
+      "bestMonth": 19.1,
+      "worstMonth": -17.7,
+      "volatility": "Very High",
+      "recoveryNote": "Markets fully recovered within 5 months of the bottom"
+    }
+  },
+  "sideways": {
+    "id": "sideways",
+    "name": "Sideways Market (2018-2019)",
+    "description": "Experience a market that goes nowhere for a long time. Learn why patience and SIP investing works even when markets feel stuck.",
+    "difficulty": "medium",
+    "duration": "24 months",
+    "icon": "swap_horiz",
+    "color": "#F59E0B",
+    "dataPoints": [
+      { "month": 0, "label": "Jan 2018", "niftyValue": 11028, "change": 0.0 },
+      { "month": 1, "label": "Feb 2018", "niftyValue": 10493, "change": -4.9 },
+      { "month": 2, "label": "Mar 2018", "niftyValue": 10113, "change": -3.6 },
+      { "month": 3, "label": "Apr 2018", "niftyValue": 10739, "change": 6.2 },
+      { "month": 4, "label": "May 2018", "niftyValue": 10736, "change": 0.0 },
+      { "month": 5, "label": "Jun 2018", "niftyValue": 10714, "change": -0.2 },
+      { "month": 6, "label": "Jul 2018", "niftyValue": 11356, "change": 6.0 },
+      { "month": 7, "label": "Aug 2018", "niftyValue": 11680, "change": 2.9 },
+      { "month": 8, "label": "Sep 2018", "niftyValue": 10930, "change": -6.4 },
+      { "month": 9, "label": "Oct 2018", "niftyValue": 10386, "change": -5.0 },
+      { "month": 10, "label": "Nov 2018", "niftyValue": 10876, "change": 4.7 },
+      { "month": 11, "label": "Dec 2018", "niftyValue": 10863, "change": -0.1 },
+      { "month": 12, "label": "Jan 2019", "niftyValue": 10831, "change": -0.3 },
+      { "month": 13, "label": "Feb 2019", "niftyValue": 10792, "change": -0.4 },
+      { "month": 14, "label": "Mar 2019", "niftyValue": 11624, "change": 7.7 },
+      { "month": 15, "label": "Apr 2019", "niftyValue": 11749, "change": 1.1 },
+      { "month": 16, "label": "May 2019", "niftyValue": 11923, "change": 1.5 },
+      { "month": 17, "label": "Jun 2019", "niftyValue": 11789, "change": -1.1 },
+      { "month": 18, "label": "Jul 2019", "niftyValue": 11118, "change": -5.7 },
+      { "month": 19, "label": "Aug 2019", "niftyValue": 11023, "change": -0.9 },
+      { "month": 20, "label": "Sep 2019", "niftyValue": 11474, "change": 4.1 },
+      { "month": 21, "label": "Oct 2019", "niftyValue": 11877, "change": 3.5 },
+      { "month": 22, "label": "Nov 2019", "niftyValue": 12056, "change": 1.5 },
+      { "month": 23, "label": "Dec 2019", "niftyValue": 12168, "change": 0.9 }
+    ],
+    "summary": {
+      "totalReturn": 10.3,
+      "maxDrawdown": -8.5,
+      "bestMonth": 7.7,
+      "worstMonth": -6.4,
+      "volatility": "Medium",
+      "sipNote": "A monthly SIP of Rs.10,000 during this period would have yielded 14.2% returns"
+    }
+  }
+}
