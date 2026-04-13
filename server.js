@@ -95,10 +95,15 @@ Please answer the user's question. Remember the disclaimer: "For educational pur
 
         if (history && Array.isArray(history)) {
             history.slice(-6).forEach(msg => {
+                let msgContent = msg.content;
+                if (!msgContent && msg.parts) {
+                    msgContent = typeof msg.parts === 'string' ? msg.parts : 
+                                 (Array.isArray(msg.parts) && msg.parts[0].text ? msg.parts[0].text : JSON.stringify(msg.parts));
+                }
+                
                 messages.push({
-                    role: msg.role === 'model' ? 'assistant' : 'user',
-                    content: typeof msg.parts === 'string' ? msg.parts : 
-                             (Array.isArray(msg.parts) && msg.parts[0].text ? msg.parts[0].text : JSON.stringify(msg.parts))
+                    role: (msg.role === 'model' || msg.role === 'assistant') ? 'assistant' : 'user',
+                    content: msgContent || ""
                 });
             });
         }
