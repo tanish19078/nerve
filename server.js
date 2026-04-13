@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const Groq = require('groq-sdk');
 require('dotenv').config({ path: '.env.local' }); // Try .env.local first
 require('dotenv').config(); // Fallback to .env
 
@@ -55,24 +55,25 @@ function sanitizeInput(text) {
 app.use(express.static(path.join(__dirname, 'pages')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// Initialize Gemini API
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'dummy_key');
+// Initialize Groq API
+const groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY || 'dummy_key'
+});
 
 // ─── /api/explain — AI Portfolio Explainer ────────────────────────────────────
 app.post('/api/explain', rateLimiter, async (req, res) => {
     try {
-        if (!process.env.GEMINI_API_KEY) {
+        if (!process.env.GROQ_API_KEY || process.env.GROQ_API_KEY.includes('your_key_here')) {
             // Mock response if no API key is provided
             return res.json({
-                explanation: "I see you're asking about your portfolio. Currently, my AI brain is sleeping because the GEMINI_API_KEY is not set in the .env file. Please add your key to enable my full potential!",
+                explanation: "I see you're asking about your portfolio. Currently, my AI brain is sleeping because the GROQ_API_KEY is not set in the .env file. Please add your key to enable my full potential!",
                 riskScore: 50,
-                suggestions: ["Add Gemini API Key to .env"]
+                suggestions: ["Add Groq API Key to .env"]
             });
         }
 
         const { portfolio, question, mode, history } = req.body;
         const sanitizedQuestion = sanitizeInput(question);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
         const systemPrompt = `You are Nerve AI, a calm and encouraging financial educator.
 Your role is to:
@@ -85,29 +86,33 @@ Your role is to:
 
 User's current portfolio: ${portfolio ? JSON.stringify(portfolio) : 'Not provided yet'}
 Mode: ${mode === 'eli5' ? 'Explain Like I\'m 5 (very simple)' : 'Normal'}
-Past history: ${history ? JSON.stringify(history.slice(-6)) : 'None'}
-
 Please answer the user's question. Remember the disclaimer: "For educational purposes only. Not financial advice."`;
 
-        const chat = model.startChat({
-            history: [
-                {
-                    role: "user",
-                    parts: [{ text: systemPrompt }]
-                },
-                {
-                    role: "model",
-                    parts: [{ text: "Understood. I will act as Nerve AI." }]
-                }
-            ],
-            generationConfig: {
-                maxOutputTokens: 1000,
-            },
+        // Format history for Groq/OpenAI format
+        const messages = [
+            { role: "system", content: systemPrompt }
+        ];
+
+        if (history && Array.isArray(history)) {
+            history.slice(-6).forEach(msg => {
+                messages.push({
+                    role: msg.role === 'model' ? 'assistant' : 'user',
+                    content: typeof msg.parts === 'string' ? msg.parts : 
+                             (Array.isArray(msg.parts) && msg.parts[0].text ? msg.parts[0].text : JSON.stringify(msg.parts))
+                });
+            });
+        }
+
+        messages.push({ role: "user", content: sanitizedQuestion || "Hello!" });
+
+        const completion = await groq.chat.completions.create({
+            messages: messages,
+            model: "llama-3.1-8b-instant",
+            max_tokens: 1000,
+            temperature: 0.7,
         });
 
-        const result = await chat.sendMessage(sanitizedQuestion || "Hello!");
-        const response = await result.response;
-        const text = response.text();
+        const text = completion.choices[0]?.message?.content || "";
 
         res.json({
             explanation: text,
@@ -116,7 +121,7 @@ Please answer the user's question. Remember the disclaimer: "For educational pur
         });
 
     } catch (error) {
-        console.error('Error with Gemini API:', error);
+        console.error('Error with Groq API:', error);
         res.status(500).json({ error: 'Failed to generate explanation. Please try again later.' });
     }
 });
@@ -162,14 +167,22 @@ app.post('/api/analyze', rateLimiter, async (req, res) => {
         // If Gemini is available, get an AI-generated insight
         let aiInsight = "Your portfolio risk profile has been analyzed based on historical patterns and your asset allocation.";
 
-        if (process.env.GEMINI_API_KEY) {
+        if (process.env.GROQ_API_KEY) {
             try {
-                const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
                 const prompt = sanitizeInput(
                     `In 2 sentences, give a brief risk insight for a ${portfolioType} portfolio with ${pnlPercentage.toFixed(1)}% P&L in a ${scenario?.name || 'current'} market scenario. Be encouraging and educational.`
                 );
-                const result = await model.generateContent(prompt);
-                aiInsight = result.response.text();
+                
+                const completion = await groq.chat.completions.create({
+                    messages: [
+                        { role: "system", content: "You are a helpful financial risk analyzer." },
+                        { role: "user", content: prompt }
+                    ],
+                    model: "llama-3.1-8b-instant",
+                    max_tokens: 150,
+                });
+                
+                aiInsight = completion.choices[0]?.message?.content || aiInsight;
             } catch (aiErr) {
                 console.warn('AI insight generation failed, using fallback:', aiErr.message);
             }
@@ -212,5 +225,5 @@ app.get('/:page', (req, res, next) => {
 
 app.listen(PORT, () => {
     console.log(`Nerve server running on http://localhost:${PORT}`);
-    console.log(`Make sure to set GEMINI_API_KEY in your .env file to enable AI features.`);
+    console.log(`Make sure to set GROQ_API_KEY in your .env file to enable AI features.`);
 });

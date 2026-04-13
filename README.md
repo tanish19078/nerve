@@ -4,35 +4,34 @@
 
 **Nerve** is a zero-risk investment education platform that helps young users overcome investing fear through simulation, AI-powered explanations, and data-driven probability visualization.
 
-Built for the **Finvasia Hackathon** — Problem Statement 3: Investing Fear.
+Built for the **Finvasia Hackathon 2026** — Problem Statement 3: Investing Fear.
 
 ---
 
 ## The Problem
 
-Young users (18–30) fear investing due to **fear of financial loss**. This prevents them from building wealth and achieving financial independence.
+Young users (18–30) often fear investing due to the **fear of financial loss**. This psychological barrier prevents them from building long-term wealth and achieving financial independence.
 
 ## Our Solution
 
-If investing risk is **contextualized** and loss is **simulated before real exposure**, fear can be reduced.
+If investing risk is **contextualized** and loss is **simulated before real exposure**, fear can be reduced. Nerve provides a safe "sandbox" where users can fail and learn without actual financial consequences.
 
 ### Three Core Features
 
 | Feature | What It Does |
 |---------|-------------|
-| **Risk Simulation Sandbox** | Experience real market scenarios (bull runs, crashes) with virtual money — zero real risk |
-| **AI Portfolio Explainer** | Gemini-powered AI that explains your portfolio, risk score, and market events in plain English |
-| **Loss Probability Meter** | See the actual historical probability of loss across different time horizons |
+| **Risk Simulation Sandbox** | Experience real market scenarios (bull runs, crashes) with virtual money — zero real risk. |
+| **AI Portfolio Explainer** | **Llama 3.1** powered AI (via Groq) that explains your portfolio, risk score, and market events in plain, encouraging language. |
+| **Loss Probability Meter** | See the actual historical probability of loss across different time horizons to build confidence with data. |
 
 ---
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
-- **Styling:** Vanilla CSS with CSS Custom Properties
-- **Charts:** Recharts
-- **AI:** Google Gemini API
-- **Animations:** Framer Motion
+- **Framework:** Node.js + Express
+- **Frontend:** Vanilla HTML/JS with CSS Custom Properties
+- **AI Engine:** Groq SDK (Meta Llama 3.1 8B Instant)
+- **Charts:** Custom CSS and JS-driven visualizations
 - **Deployment:** Vercel
 
 ---
@@ -42,13 +41,13 @@ If investing risk is **contextualized** and loss is **simulated before real expo
 ### Prerequisites
 - Node.js 18+
 - npm 9+
-- Google Gemini API Key
+- [Groq API Key](https://console.groq.com)
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-team/nerve.git
+git clone https://github.com/tanish19078/nerve.git
 cd nerve
 
 # Install dependencies
@@ -56,64 +55,46 @@ npm install
 
 # Set up environment variables
 cp .env.example .env.local
-# Edit .env.local and add your GEMINI_API_KEY
+# Edit .env.local and add your GROQ_API_KEY
+```
 
+### Running Locally
+
+```bash
 # Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
-
-### Environment Variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes | Google Gemini API key for AI features |
-| `NEXT_PUBLIC_APP_NAME` | No | App display name (default: Nerve) |
+The server will be running on [http://localhost:8080](http://localhost:8080).
 
 ---
 
 ## Project Structure
 
 ```
-src/
-├── app/                  # Next.js App Router pages
-│   ├── page.js           # Landing page
-│   ├── onboard/          # Risk quiz + portfolio selection
-│   ├── dashboard/        # Main hub
-│   ├── sandbox/          # Simulation engine
-│   ├── explain/          # AI chat interface
-│   ├── probability/      # Loss probability meter
-│   ├── results/          # Post-simulation results
-│   └── progress/         # Confidence tracking
-├── components/           # Reusable components
-├── context/              # React Context providers
-├── hooks/                # Custom hooks
-├── lib/                  # Utility functions
-└── styles/               # Global styles & design tokens
+.
+├── pages/              # Static HTML interface
+│   ├── index.html      # Landing page
+│   ├── dashboard.html  # Main feature hub
+│   ├── ai-chat.html    # AI integration interface
+│   └── ...             # Other feature pages
+├── public/             # Static assets
+│   ├── css/            # Global styling and design system
+│   ├── js/             # Dashboard and simulation logic
+│   └── data/           # Market data and scenario JSONs
+├── server.js           # Express backend and AI API integration
+├── .env.local          # Environment variables (local dev)
+└── .env.example        # Environment variable template
 ```
 
 ---
 
-## Scripts
+## Environment Variables
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Create production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-
----
-
-## Deployment
-
-This project is optimized for **Vercel**:
-
-1. Push to GitHub
-2. Connect repository to Vercel
-3. Set environment variables in Vercel dashboard
-4. Deploy
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GROQ_API_KEY` | **Yes** | Groq API key for Llama 3.1 AI features |
+| `NEXT_PUBLIC_APP_NAME` | No | App display name (default: Nerve) |
 
 ---
 
